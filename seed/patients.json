@@ -1,0 +1,35 @@
+[
+  {
+    "personal": {
+      "name": "Ritika Singh",
+      "phone": "9424232211",
+      "age": 31,
+      "location": "Mumbai",
+      "visitDate": "2025-09-15",
+      "package": "Standard FUE"
+    },
+    "counselling": {
+      "counsellor": "Dr. Arora",
+      "techniqueSuggested": "FUE",
+      "graftsSuggested": 3500,
+      "packageQuoted": 143746,
+      "readyForSurgery": true
+    },
+    "surgery": {
+      "surgeryDate": "2025-09-10",
+      "technique": "FUE",
+      "graftsPlanned": 3493,
+      "graftsImplanted": 3431,
+      "doctor": "Dr. Arora"
+    },
+    "payments": {
+      "totalQuoted": 143746,
+      "amountReceived": 143746,
+      "pendingAmount": 0,
+      "transactions": [
+        { "date": "2025-09-09", "method": "Cash", "amount": 143746 }
+      ]
+    },
+    "ops": { "status": "SURGERY_SCHEDULED" }
+  }
+]

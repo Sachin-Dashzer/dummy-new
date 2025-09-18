@@ -1,0 +1,5 @@
+[
+  { "name": "Admin User", "email": "admin@crm.com", "phone": "9999999999", "password": "admin123", "role": "Admin" },
+  { "name": "Agent One", "email": "agent1@crm.com", "phone": "8888888888", "password": "agent123", "role": "Agent" },
+  { "name": "Counsellor One", "email": "coun1@crm.com", "phone": "7777777777", "password": "coun123", "role": "Counsellor" }
+]

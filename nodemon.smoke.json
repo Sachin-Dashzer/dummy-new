@@ -1,0 +1,6 @@
+{
+  "watch": ["app/api", "lib", "models"],
+  "ext": "js,json",
+  "delay": "700",
+  "exec": "node scripts/smoke.mjs"
+}
