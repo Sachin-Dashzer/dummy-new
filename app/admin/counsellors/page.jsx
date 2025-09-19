@@ -15,28 +15,22 @@ import {
   Building
 } from "lucide-react";
 import Sidebar from "../../../components/Sidebar";
-import Topbar from "../../../components/Topbar";
 import MetricCard from "../../../components/MetricCard";
-import { useFilterPatients } from "@/app/hooks/useFilters";
+import { usePatients } from "@/app/hooks/usePatients";
 
 export default function CounsellorDashboard() {
   const [activePage, setActivePage] = useState("Counsellors");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [timeRange, setTimeRange] = useState("Today");
-  const [branch, setBranch] = useState("Delhi");
   const [sortBy, setSortBy] = useState("consults");
   const [sortOrder, setSortOrder] = useState("desc");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedCounsellor, setExpandedCounsellor] = useState(null);
 
   // ✅ fetch filtered patients for the branch + time
-  const { patients, loading, error } = useFilterPatients(
-    "2025-09-02T00:00:00.000Z",
-    branch
-  );
+  const { patients, loading, error, refresh } = usePatients();
 
   // Group patients by counsellor
-  const counsellorStats = patients?.allpatients?.reduce((acc, p) => {
+  const counsellorStats = patients?.reduce((acc, p) => {
     const cName = p?.counselling?.counsellor || "Unknown";
 
     if (!acc[cName]) {

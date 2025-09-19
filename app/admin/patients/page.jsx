@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+ import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
 
 // Constants
@@ -36,7 +37,6 @@ const STATUS_COLORS = {
 export default function PatientDashboard() {
   const [patients, setPatients] = useState([]);
   const [filteredPatients, setFilteredPatients] = useState([]);
-  const [selectedPatients, setSelectedPatients] = useState([]);
   const [filters, setFilters] = useState({
     search: "",
     status: "",
@@ -167,7 +167,10 @@ export default function PatientDashboard() {
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredPatients.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredPatients.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const totalPages = Math.ceil(filteredPatients.length / itemsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -185,8 +188,8 @@ export default function PatientDashboard() {
         <div className="bg-red-50 p-4 rounded-md border border-red-200 text-red-700">
           <p className="font-medium">Error loading patient data</p>
           <p className="text-sm mt-1">{error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="mt-3 px-4 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition"
           >
             Try Again
@@ -210,12 +213,24 @@ export default function PatientDashboard() {
                 Manage and track all patient records
               </p>
             </div>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+            <Link
+              href="add-patient"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
               </svg>
               New Patient
-            </button>
+            </Link>
           </div>
         </header>
 
@@ -225,64 +240,125 @@ export default function PatientDashboard() {
             <div className="bg-white rounded-lg shadow p-4">
               <div className="flex items-center">
                 <div className="rounded-full bg-blue-100 p-3 mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Total Patients</p>
-                  <p className="text-2xl font-bold text-gray-900">{patients.length}</p>
+                  <p className="text-sm font-medium text-gray-600">
+                    Total Patients
+                  </p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {patients.length}
+                  </p>
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow p-4">
               <div className="flex items-center">
                 <div className="rounded-full bg-green-100 p-3 mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-green-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Active Cases</p>
+                  <p className="text-sm font-medium text-gray-600">
+                    Active Cases
+                  </p>
                   <p className="text-2xl font-bold text-gray-900">
-                    {patients.filter(p => p.ops.status !== "CLOSED").length}
+                    {patients.filter((p) => p.ops.status !== "CLOSED").length}
                   </p>
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow p-4">
               <div className="flex items-center">
                 <div className="rounded-full bg-purple-100 p-3 mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Scheduled Today</p>
+                  <p className="text-sm font-medium text-gray-600">
+                    Scheduled Today
+                  </p>
                   <p className="text-2xl font-bold text-gray-900">
-                    {patients.filter(p => {
-                      const today = new Date().toDateString();
-                      const visitDate = new Date(p.personal.visitDate).toDateString();
-                      return visitDate === today;
-                    }).length}
+                    {
+                      patients.filter((p) => {
+                        const today = new Date().toDateString();
+                        const visitDate = new Date(
+                          p.personal.visitDate
+                        ).toDateString();
+                        return visitDate === today;
+                      }).length
+                    }
                   </p>
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow p-4">
               <div className="flex items-center">
                 <div className="rounded-full bg-orange-100 p-3 mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-orange-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Need Follow-up</p>
+                  <p className="text-sm font-medium text-gray-600">
+                    Need Follow-up
+                  </p>
                   <p className="text-2xl font-bold text-gray-900">
-                    {patients.filter(p => p.ops.status === "COUNSELLING").length}
+                    {
+                      patients.filter((p) => p.ops.status === "COUNSELLING")
+                        .length
+                    }
                   </p>
                 </div>
               </div>
@@ -295,13 +371,24 @@ export default function PatientDashboard() {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
             <div className="flex gap-2">
-              <button 
+              <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
               >
-                {showFilters ? 'Hide Filters' : 'Show Filters'}
-                <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ml-1 transition-transform ${showFilters ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                {showFilters ? "Hide Filters" : "Show Filters"}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-4 w-4 ml-1 transition-transform ${
+                    showFilters ? "rotate-180" : ""
+                  }`}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
               <button
@@ -309,8 +396,17 @@ export default function PatientDashboard() {
                 className="text-sm text-gray-600 hover:text-gray-900 flex items-center"
               >
                 Clear All
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 ml-1"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
             </div>
@@ -326,11 +422,13 @@ export default function PatientDashboard() {
                 setFilters({ ...filters, search: e.target.value })
               }
             />
-            
+
             {showFilters && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Status
+                  </label>
                   <select
                     className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
                     value={filters.status}
@@ -340,13 +438,17 @@ export default function PatientDashboard() {
                   >
                     <option value="">All Stages</option>
                     {STATUS_OPTIONS.map((s) => (
-                      <option key={s} value={s}>{s.replace("_", " ")}</option>
+                      <option key={s} value={s}>
+                        {s.replace("_", " ")}
+                      </option>
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Location
+                  </label>
                   <select
                     className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
                     value={filters.location}
@@ -356,13 +458,17 @@ export default function PatientDashboard() {
                   >
                     <option value="">All Locations</option>
                     {LOCATION_OPTIONS.map((loc) => (
-                      <option key={loc} value={loc}>{loc}</option>
+                      <option key={loc} value={loc}>
+                        {loc}
+                      </option>
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Counsellor</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Counsellor
+                  </label>
                   <select
                     className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
                     value={filters.counsellor}
@@ -372,13 +478,17 @@ export default function PatientDashboard() {
                   >
                     <option value="">All Users</option>
                     {counsellorOptions.map((c) => (
-                      <option key={c} value={c}>{c}</option>
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Package</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Package
+                  </label>
                   <select
                     className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
                     value={filters.package}
@@ -388,13 +498,17 @@ export default function PatientDashboard() {
                   >
                     <option value="">All Packages</option>
                     {PACKAGE_OPTIONS.map((pkg) => (
-                      <option key={pkg} value={pkg}>{pkg}</option>
+                      <option key={pkg} value={pkg}>
+                        {pkg}
+                      </option>
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date From</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Date From
+                  </label>
                   <input
                     type="date"
                     className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
@@ -404,9 +518,11 @@ export default function PatientDashboard() {
                     }
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date To</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Date To
+                  </label>
                   <input
                     type="date"
                     className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
@@ -438,8 +554,21 @@ export default function PatientDashboard() {
                       <div className="flex items-center">
                         Visit Date
                         {sortConfig.key === "personal.visitDate" && (
-                          <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ml-1 ${sortConfig.direction === "ascending" ? "" : "rotate-180"}`} viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-4 w-4 ml-1 ${
+                              sortConfig.direction === "ascending"
+                                ? ""
+                                : "rotate-180"
+                            }`}
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                         )}
                       </div>
@@ -469,56 +598,78 @@ export default function PatientDashboard() {
                                 {patient.personal.name}
                               </div>
                               <div className="text-xs text-gray-500 mt-1">
-                                {patient.personal.gender}, {patient.personal.age}y
+                                {patient.personal.gender},{" "}
+                                {patient.personal.age}y
                               </div>
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="text-gray-900">{patient.personal.phone}</div>
+                          <div className="text-gray-900">
+                            {patient.personal.phone}
+                          </div>
                         </td>
-                       
+
                         <td className="px-6 py-4 hidden lg:table-cell">
-                          <div className="text-gray-700">{patient.personal.location}</div>
+                          <div className="text-gray-700">
+                            {patient.personal.location}
+                          </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="text-gray-700">{formatDate(patient.personal.visitDate)}</div>
+                          <div className="text-gray-700">
+                            {formatDate(patient.personal.visitDate)}
+                          </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${STATUS_COLORS[patient.ops.status] || "bg-gray-100 text-gray-800"}`}>
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              STATUS_COLORS[patient.ops.status] ||
+                              "bg-gray-100 text-gray-800"
+                            }`}
+                          >
                             {patient.ops.status.replace("_", " ")}
                           </span>
                         </td>
                         <td className="px-6 py-4 hidden xl:table-cell">
-                          <div className="text-gray-700">{patient.personal.package}</div>
+                          <div className="text-gray-700">
+                            {patient.personal.package}
+                          </div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex justify-end gap-3">
-                            <button 
+                            <Link
+                              href={`/admin/patients/${patient._id}`}
                               className="text-indigo-600 hover:text-indigo-900 transition p-1 rounded-full hover:bg-indigo-50"
                               title="View patient details"
                             >
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                                <path
+                                  fillRule="evenodd"
+                                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                  clipRule="evenodd"
+                                />
                               </svg>
-                            </button>
-                            <button 
+                            </Link>
+                            <button
                               className="text-blue-600 hover:text-blue-900 transition p-1 rounded-full hover:bg-blue-50"
                               title="Edit patient"
                             >
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
                                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                               </svg>
                             </button>
-                            <button 
-                              className="text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-50"
-                              title="More options"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                              </svg>
-                            </button>
+                           
                           </div>
                         </td>
                       </tr>
@@ -529,12 +680,26 @@ export default function PatientDashboard() {
                         colSpan="8"
                         className="px-6 py-8 text-center text-gray-500"
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-12 w-12 mx-auto text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                         <p className="mt-4 font-medium">No patients found</p>
-                        <p className="mt-1 text-sm">Try adjusting your search or filter to find what you're looking for.</p>
-                        <button 
+                        <p className="mt-1 text-sm">
+                          Try adjusting your search or filter to find what
+                          you're looking for.
+                        </p>
+                        <button
                           onClick={clearFilters}
                           className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition"
                         >
@@ -552,13 +717,16 @@ export default function PatientDashboard() {
           {filteredPatients.length > 0 && (
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-sm text-gray-700">
-                Showing <span className="font-medium">{indexOfFirstItem + 1}</span> to{" "}
+                Showing{" "}
+                <span className="font-medium">{indexOfFirstItem + 1}</span> to{" "}
                 <span className="font-medium">
                   {Math.min(indexOfLastItem, filteredPatients.length)}
                 </span>{" "}
-                of <span className="font-medium">{filteredPatients.length}</span> patients
+                of{" "}
+                <span className="font-medium">{filteredPatients.length}</span>{" "}
+                patients
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <select
                   value={itemsPerPage}
@@ -570,7 +738,7 @@ export default function PatientDashboard() {
                   <option value="25">25 per page</option>
                   <option value="50">50 per page</option>
                 </select>
-                
+
                 <div className="flex bg-white rounded-md shadow-sm">
                   <button
                     onClick={() => paginate(Math.max(1, currentPage - 1))}
@@ -579,7 +747,7 @@ export default function PatientDashboard() {
                   >
                     Previous
                   </button>
-                  
+
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     let pageNum;
                     if (totalPages <= 5) {
@@ -591,7 +759,7 @@ export default function PatientDashboard() {
                     } else {
                       pageNum = currentPage - 2 + i;
                     }
-                    
+
                     return (
                       <button
                         key={pageNum}
@@ -606,9 +774,11 @@ export default function PatientDashboard() {
                       </button>
                     );
                   })}
-                  
+
                   <button
-                    onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+                    onClick={() =>
+                      paginate(Math.min(totalPages, currentPage + 1))
+                    }
                     disabled={currentPage === totalPages}
                     className="px-3 py-2 rounded-r-md border text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
