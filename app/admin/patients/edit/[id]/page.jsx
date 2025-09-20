@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Sidebar from "@/components/Sidebar";
 import {
   Upload,
   X,
@@ -33,7 +34,8 @@ function InputField({
   if (type === "select") {
     return (
       <div className={className}>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block t
+        ext-sm font-semibold text-gray-700 mb-2">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
         <select
@@ -107,6 +109,8 @@ function InputField({
 export default function PatientEditDetails() {
   const [step, setStep] = useState(1);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [updateStatus, setUpdateStatus] = useState(null);
   const [formData, setFormData] = useState({
     personal: {
@@ -331,6 +335,7 @@ export default function PatientEditDetails() {
 
   return (
     <section className="flex min-h-screen bg-gray-50">
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <main className="flex-1 px-12 py-4">
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <div className="px-8 py-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">

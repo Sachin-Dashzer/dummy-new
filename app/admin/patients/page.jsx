@@ -1,7 +1,10 @@
 "use client";
 
+"use client";
+
 import { useState, useEffect } from "react";
- import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
 
 // Constants
@@ -31,21 +34,25 @@ const STATUS_COLORS = {
   READY: "bg-yellow-100 text-yellow-800",
   SURGERY_SCHEDULED: "bg-orange-100 text-orange-800",
   POST_OP: "bg-green-100 text-green-800",
-  CLOSED: "bg-gray-100 text-gray-800",
+  CLOSED: "bg-gray-100 text-gray-800",  
 };
 
 export default function PatientDashboard() {
+  const searchParams = useSearchParams();
   const [patients, setPatients] = useState([]);
   const [filteredPatients, setFilteredPatients] = useState([]);
+
+  // Initialize filters with URL parameters if present
   const [filters, setFilters] = useState({
     search: "",
-    status: "",
+    status: searchParams.get("status") || "",
     location: "",
     counsellor: "",
-    package: "",
-    dateFrom: "",
-    dateTo: "",
+    package: searchParams.get("package") || "",
+    dateFrom: searchParams.get("dateFrom") || "",
+    dateTo: searchParams.get("dateTo") || "",
   });
+
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
@@ -54,7 +61,32 @@ export default function PatientDashboard() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(
+    !!searchParams.get("status") ||
+      !!searchParams.get("dateFrom") ||
+      !!searchParams.get("package")
+  );
+
+  // Update filters when URL parameters change
+  useEffect(() => {
+    const status = searchParams.get("status");
+    const dateFrom = searchParams.get("dateFrom");
+    const dateTo = searchParams.get("dateTo");
+    const packageFilter = searchParams.get("package");
+
+    if (status || dateFrom || dateTo || packageFilter) {
+      setFilters((prev) => ({
+        ...prev,
+        status: status || prev.status,
+        dateFrom: dateFrom || prev.dateFrom,
+        dateTo: dateTo || prev.dateTo,
+        package: packageFilter || prev.package,
+      }));
+
+      // Auto-show filters when coming from dashboard
+      setShowFilters(true);
+    }
+  }, [searchParams]);
 
   // Load patient data
   useEffect(() => {
@@ -122,6 +154,7 @@ export default function PatientDashboard() {
     setCurrentPage(1); // Reset to first page when filters change
   }, [filters, patients]);
 
+  // ... rest of the component remains the same ...
   // Sorting
   const handleSort = (key) => {
     let direction = "ascending";
@@ -669,7 +702,6 @@ export default function PatientDashboard() {
                                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                               </svg>
                             </button>
-                           
                           </div>
                         </td>
                       </tr>

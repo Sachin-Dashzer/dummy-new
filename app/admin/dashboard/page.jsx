@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Calendar,
   Activity,
@@ -15,25 +16,47 @@ import ChartsSection from "../../../components/ChartsSection";
 import RecentActivity from "../../../components/RecentActivity";
 import { useFilterPatients } from "@/app/hooks/useFilters";
 
-
-
-
-
 export default function AdminDashboard() {
+  const router = useRouter();
   const [activePage, setActivePage] = useState("Dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const [timeRange, setTimeRange] = useState("Today");
   const [branch, setBranch] = useState("Delhi");
 
   // ✅ use hook directly
   const {patients , loading , error} = useFilterPatients("2025-09-02T00:00:00.000Z", "Delhi");
-
-
   const rowdata = patients;
 
-
-  console.log(rowdata)
+  // Function to handle metric card click
+  const handleMetricClick = (metricTitle) => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    
+    let filterParams = "";
+    
+    switch(metricTitle) {
+      case "Appointments":
+        filterParams = `dateFrom=${formattedDate}&dateTo=${formattedDate}`;
+        break;
+      case "Patients Visited":
+        filterParams = `dateFrom=${formattedDate}&dateTo=${formattedDate}`;
+        break;
+      case "Surgery Confirmations":
+        filterParams = `status=READY`;
+        break;
+      case "Surgeries":
+        filterParams = `status=POST_OP&dateFrom=${formattedDate}&dateTo=${formattedDate}`;
+        break;
+      case "Amount Received":
+        filterParams = `package=&dateFrom=${formattedDate}&dateTo=${formattedDate}`;
+        break;
+      default:
+        filterParams = "";
+    }
+    
+    // Navigate to patient dashboard with appropriate filters
+    router.push(`/admin/patients?${filterParams}`);
+  };
 
   const metricCards = [
     {
@@ -51,14 +74,14 @@ export default function AdminDashboard() {
       trend: "+8% from yesterday",
     },
     {
-      title: "Surgery Confirmations",
+      title: "Surgery Ready",
       value: rowdata?.surgeryConfirmations || 0,
       icon: CheckCircle,
       color: "from-amber-500 to-amber-600",
       trend: "+5% from yesterday",
     },
     {
-      title: "Surgeries",
+      title: "Today's Surgeries",
       value: rowdata?.surgeries || 0,
       icon: Stethoscope,
       color: "from-rose-500 to-rose-600",
@@ -106,6 +129,7 @@ export default function AdminDashboard() {
                   icon={card.icon}
                   color={card.color}
                   trend={card.trend}
+                  onClick={() => handleMetricClick(card.title)}
                 />
               ))}
             </div>
