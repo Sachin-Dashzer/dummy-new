@@ -42,6 +42,15 @@ export default function PatientDashboard() {
   const [patients, setPatients] = useState([]);
   const [filteredPatients, setFilteredPatients] = useState([]);
 
+
+  if(!searchParams.get("dateTo")){
+    console.log("npne")
+  }
+  else{
+    console.log("hoeld")
+  }
+
+
   // Initialize filters with URL parameters if present
   const [filters, setFilters] = useState({
     search: "",

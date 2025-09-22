@@ -6,12 +6,13 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   phone: String,
   password: String,
-  role: { type: String, enum: ["Agent", "Counsellor", "Admin"], default: "Agent" }
+  role: { type: String, enum: ["Agent", "Counsellor", "Admin" , "Implanter" , "technician"], default: "Agent" },
+  patients : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Patient' }]
 }, { timestamps: true });
 
 // password hash
 userSchema.pre("save", async function(next) {
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password")) return next();  
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });

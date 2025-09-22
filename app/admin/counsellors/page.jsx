@@ -12,7 +12,6 @@ import {
   ChevronUp,
   Search,
   Calendar,
-  Building,
   Mail,
   Phone,
   Users,

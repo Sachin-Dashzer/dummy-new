@@ -17,5 +17,5 @@ export async function GET(req) {
     .sort({ createdAt: -1 })
     .limit(100);
 
-  return NextResponse.json({ items: patients });
+  return NextResponse.json({  length : patients.length , items: patients });
 }

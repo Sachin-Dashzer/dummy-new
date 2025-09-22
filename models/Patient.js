@@ -17,7 +17,10 @@ const patientSchema = new mongoose.Schema(
       },
       address: String,
       visitDate: Date,
-      reference: String,
+      reference: {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User"
+      },
       package: String,
     },
     medical: {
@@ -38,18 +41,8 @@ const patientSchema = new mongoose.Schema(
     },
     counselling: {
       counsellor: {
-        type: String,
-        enum: [
-          "Dr. Sonu Sharma",
-          "Dr. Pranendra singh",
-          "Dr. Mukul Tyagi",
-          "Dr. Gulnaaz Salmani",
-          "Dr. Suraksha",
-          "Dr. Amar",
-          "Dr. Avinash",
-          "Dr. Subareddy",
-          "Dr. Ali",
-        ],
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
       },
       techniqueSuggested: {
         type: String,
@@ -69,11 +62,26 @@ const patientSchema = new mongoose.Schema(
       graftsPlanned: Number,
       graftsImplanted: Number,
       donorCondition: String,
-      doctor: String,
-      seniorTech: String,
-      implanterRight: String,
-      implanterLeft: String,
-      graftingPerson: String,
+      doctor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
+      },
+      seniorTech: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
+      },
+      implanterRight: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
+      },
+      implanterLeft: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
+      },
+      graftingPerson: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
+      },
       helper: String,
     },
     payments: {
