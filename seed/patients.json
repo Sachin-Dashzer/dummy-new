@@ -1,35 +1,2427 @@
-[
-  {
-    "personal": {
-      "name": "Ritika Singh",
-      "phone": "9424232211",
-      "age": 31,
-      "location": "Mumbai",
-      "visitDate": "2025-09-15",
-      "package": "Standard FUE"
-    },
-    "counselling": {
-      "counsellor": "Dr. Arora",
-      "techniqueSuggested": "FUE",
-      "graftsSuggested": 3500,
-      "packageQuoted": 143746,
-      "readyForSurgery": true
-    },
-    "surgery": {
-      "surgeryDate": "2025-09-10",
-      "technique": "FUE",
-      "graftsPlanned": 3493,
-      "graftsImplanted": 3431,
-      "doctor": "Dr. Arora"
-    },
-    "payments": {
-      "totalQuoted": 143746,
-      "amountReceived": 143746,
-      "pendingAmount": 0,
-      "transactions": [
-        { "date": "2025-09-09", "method": "Cash", "amount": 143746 }
-      ]
-    },
-    "ops": { "status": "SURGERY_SCHEDULED" }
-  }
-]
+{
+    "length": 30,
+    "items": [
+        {
+            "personal": {
+                "name": "Kabir Anand",
+                "phone": "91-9876500255",
+                "email": "kabir.anand@example.com",
+                "age": 39,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "C-89, Hauz Khas, New Delhi",
+                "visitDate": "2025-10-03T10:00:00.000Z",
+                "reference": "Rinky",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "YES",
+                "bloodGroup": "B-",
+                "sugar": "96 mg/dL",
+                "bp": "118/78 mmHg",
+                "pulse": "71 bpm",
+                "weight": "81 kg"
+            },
+            "counselling": {
+                "counsellor": "Gulnaaz salmani",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 2000,
+                "packageQuoted": 135000,
+                "readyForSurgery": true,
+                "notes": "Requested Monday OT",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-29T11:00:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 2000,
+                "graftsImplanted": 1980,
+                "donorCondition": "Good",
+                "doctor": "Srishti",
+                "seniorTech": "Advait Joshi",
+                "implanterRight": "Priya Singh",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Ritu Choudhary",
+                "helper": "Aditya Sharma"
+            },
+            "payments": {
+                "totalQuoted": 135000,
+                "amountReceived": 85000,
+                "pendingAmount": 50000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-10-03T11:30:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 85000,
+                        "_id": "68d2c7fb13674f014f0ec23c"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_kabir_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_kabir.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_kabir.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7fb13674f014f0ec23b",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:59.063Z",
+            "updatedAt": "2025-09-23T16:16:59.063Z"
+        },
+        {
+            "personal": {
+                "name": "Radhika Pillai",
+                "phone": "91-9876500244",
+                "email": "radhika.pillai@example.com",
+                "age": 30,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "DD-67, Worli Sea Face, Mumbai",
+                "visitDate": "2025-10-02T15:00:00.000Z",
+                "reference": "Nandani",
+                "package": "Female Premium FUE"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "O-",
+                "sugar": "94 mg/dL",
+                "bp": "112/70 mmHg",
+                "pulse": "68 bpm",
+                "weight": "56 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 1600,
+                "packageQuoted": 115000,
+                "readyForSurgery": false,
+                "notes": "Wants counselling with female staff",
+                "medicines": [
+                    "Multivitamins"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-28T09:30:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 1600,
+                "graftsImplanted": 1580,
+                "donorCondition": "Fair",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Ritu Yadav"
+            },
+            "payments": {
+                "totalQuoted": 115000,
+                "amountReceived": 60000,
+                "pendingAmount": 55000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-10-02T16:00:00.000Z",
+                        "method": "Card",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c7fb13674f014f0ec23a"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_radhika_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_radhika.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_radhika.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7fb13674f014f0ec239",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:59.063Z",
+            "updatedAt": "2025-09-23T16:16:59.063Z"
+        },
+        {
+            "personal": {
+                "name": "Nikhil Sharma",
+                "phone": "91-9876500233",
+                "email": "nikhil.sharma@example.com",
+                "age": 37,
+                "gender": "MALE",
+                "location": "Hyderabad",
+                "address": "B-67, Gachibowli, Hyderabad",
+                "visitDate": "2025-10-02T10:30:00.000Z",
+                "reference": "Ryan",
+                "package": "Sapphire FUE"
+            },
+            "medical": {
+                "allergies": "Gluten",
+                "medicalHistory": "YES",
+                "bloodGroup": "B+",
+                "sugar": "98 mg/dL",
+                "bp": "119/77 mmHg",
+                "pulse": "72 bpm",
+                "weight": "79 kg"
+            },
+            "counselling": {
+                "counsellor": "Mukul Tyagi",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 2000,
+                "packageQuoted": 130000,
+                "readyForSurgery": true,
+                "notes": "Requested weekend OT",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-27T10:00:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 2000,
+                "graftsImplanted": 1980,
+                "donorCondition": "Good",
+                "doctor": "Srishti",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Kavya Srinivasan",
+                "helper": "Ajay Singh"
+            },
+            "payments": {
+                "totalQuoted": 130000,
+                "amountReceived": 70000,
+                "pendingAmount": 60000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-10-02T12:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 70000,
+                        "_id": "68d2c7fb13674f014f0ec238"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_nikhil_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_nikhil.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_nikhil.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7fb13674f014f0ec237",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:59.062Z",
+            "updatedAt": "2025-09-23T16:16:59.062Z"
+        },
+        {
+            "personal": {
+                "name": "Tanya Kapoor",
+                "phone": "91-9876500222",
+                "email": "tanya.kapoor@example.com",
+                "age": 26,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "G-11, Powai, Mumbai",
+                "visitDate": "2025-10-01T12:00:00.000Z",
+                "reference": "Anjali",
+                "package": "Indian DHI"
+            },
+            "medical": {
+                "allergies": "Pollen",
+                "medicalHistory": "UNKNOWN",
+                "bloodGroup": "A+",
+                "sugar": "92 mg/dL",
+                "bp": "115/76 mmHg",
+                "pulse": "71 bpm",
+                "weight": "55 kg"
+            },
+            "counselling": {
+                "counsellor": "Srishti",
+                "techniqueSuggested": "INDIAN DHI",
+                "graftsSuggested": 1600,
+                "packageQuoted": 115000,
+                "readyForSurgery": false,
+                "notes": "Needs family confirmation",
+                "medicines": [
+                    "Iron",
+                    "Biotin"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-26T11:30:00.000Z",
+                "technique": "INDIAN DHI",
+                "graftsPlanned": 1600,
+                "graftsImplanted": 1550,
+                "donorCondition": "Fair",
+                "doctor": "Pranav",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Arjun Kapoor",
+                "helper": "Sneha Rao"
+            },
+            "payments": {
+                "totalQuoted": 115000,
+                "amountReceived": 50000,
+                "pendingAmount": 65000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-10-01T13:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c7fb13674f014f0ec236"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_tanya_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_tanya.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_tanya.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7fb13674f014f0ec235",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:59.062Z",
+            "updatedAt": "2025-09-23T16:16:59.062Z"
+        },
+        {
+            "personal": {
+                "name": "Arnav Mehta",
+                "phone": "91-9876500211",
+                "email": "arnav.mehta@example.com",
+                "age": 29,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "A-77, Connaught Place, New Delhi",
+                "visitDate": "2025-10-01T09:00:00.000Z",
+                "reference": "Nandani",
+                "package": "Hybrid Package"
+            },
+            "medical": {
+                "allergies": "Dust",
+                "medicalHistory": "NO",
+                "bloodGroup": "AB+",
+                "sugar": "95 mg/dL",
+                "bp": "120/78 mmHg",
+                "pulse": "72 bpm",
+                "weight": "71 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "HYBRID",
+                "graftsSuggested": 2300,
+                "packageQuoted": 150000,
+                "readyForSurgery": true,
+                "notes": "Patient wants fast recovery meds",
+                "medicines": [
+                    "Biotin"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-25T10:00:00.000Z",
+                "technique": "HYBRID",
+                "graftsPlanned": 2300,
+                "graftsImplanted": 2250,
+                "donorCondition": "Strong",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Saurabh Bansal"
+            },
+            "payments": {
+                "totalQuoted": 150000,
+                "amountReceived": 70000,
+                "pendingAmount": 80000,
+                "medicineAmount": 4000,
+                "transactions": [
+                    {
+                        "date": "2025-10-01T11:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 70000,
+                        "_id": "68d2c7fb13674f014f0ec234"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_arnav_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_arnav.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_arnav.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7fb13674f014f0ec233",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:59.062Z",
+            "updatedAt": "2025-09-23T16:16:59.062Z"
+        },
+        {
+            "personal": {
+                "name": "Rohan Sethi",
+                "phone": "91-9876500200",
+                "email": "rohan.sethi@example.com",
+                "age": 34,
+                "gender": "MALE",
+                "location": "Mumbai",
+                "address": "D-77, Andheri East, Mumbai",
+                "visitDate": "2025-09-30T15:00:00.000Z",
+                "reference": "Aisha",
+                "package": "Standard FUE"
+            },
+            "medical": {
+                "allergies": "Seafood",
+                "medicalHistory": "NO",
+                "bloodGroup": "O+",
+                "sugar": "96 mg/dL",
+                "bp": "118/78 mmHg",
+                "pulse": "72 bpm",
+                "weight": "74 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 1800,
+                "packageQuoted": 120000,
+                "readyForSurgery": true,
+                "notes": "Requested Friday surgery",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-24T10:30:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 1800,
+                "graftsImplanted": 1780,
+                "donorCondition": "Good",
+                "doctor": "Srishti",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Parth Mehta"
+            },
+            "payments": {
+                "totalQuoted": 120000,
+                "amountReceived": 80000,
+                "pendingAmount": 40000,
+                "medicineAmount": 2000,
+                "transactions": [
+                    {
+                        "date": "2025-09-30T16:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 80000,
+                        "_id": "68d2c7e113674f014f0ec231"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_rohan_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_rohan.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_rohan.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7e113674f014f0ec230",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:33.647Z",
+            "updatedAt": "2025-09-23T16:16:33.647Z"
+        },
+        {
+            "personal": {
+                "name": "Aditi Singh",
+                "phone": "91-9876500199",
+                "email": "aditi.singh@example.com",
+                "age": 27,
+                "gender": "FEMALE",
+                "location": "Delhi",
+                "address": "H-55, Saket, New Delhi",
+                "visitDate": "2025-09-30T09:30:00.000Z",
+                "reference": "Anjali",
+                "package": "Indian DHI"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "UNKNOWN",
+                "bloodGroup": "AB+",
+                "sugar": "97 mg/dL",
+                "bp": "115/75 mmHg",
+                "pulse": "70 bpm",
+                "weight": "53 kg"
+            },
+            "counselling": {
+                "counsellor": "Sonu sharma",
+                "techniqueSuggested": "INDIAN DHI",
+                "graftsSuggested": 1700,
+                "packageQuoted": 125000,
+                "readyForSurgery": false,
+                "notes": "Needs family approval",
+                "medicines": [
+                    "Multivitamins"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-23T11:00:00.000Z",
+                "technique": "INDIAN DHI",
+                "graftsPlanned": 1700,
+                "graftsImplanted": 1650,
+                "donorCondition": "Fair",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Nidhi Sharma"
+            },
+            "payments": {
+                "totalQuoted": 125000,
+                "amountReceived": 60000,
+                "pendingAmount": 65000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-30T10:30:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c7e113674f014f0ec22f"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_aditi_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_aditi.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_aditi.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7e113674f014f0ec22e",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:33.647Z",
+            "updatedAt": "2025-09-23T16:16:33.647Z"
+        },
+        {
+            "personal": {
+                "name": "Harsh Vardhan",
+                "phone": "91-9876500188",
+                "email": "harsh.vardhan@example.com",
+                "age": 40,
+                "gender": "MALE",
+                "location": "Hyderabad",
+                "address": "P-90, Kukatpally, Hyderabad",
+                "visitDate": "2025-09-29T13:30:00.000Z",
+                "reference": "Ryan",
+                "package": "Sapphire FUE"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "A+",
+                "sugar": "92 mg/dL",
+                "bp": "120/80 mmHg",
+                "pulse": "71 bpm",
+                "weight": "80 kg"
+            },
+            "counselling": {
+                "counsellor": "Mukul Tyagi",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 2100,
+                "packageQuoted": 135000,
+                "readyForSurgery": true,
+                "notes": "Needs 2 days leave from work",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-22T10:00:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 2100,
+                "graftsImplanted": 2050,
+                "donorCondition": "Strong",
+                "doctor": "Srishti",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Priya Singh",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Kavya Srinivasan",
+                "helper": "Tarun Mehta"
+            },
+            "payments": {
+                "totalQuoted": 135000,
+                "amountReceived": 80000,
+                "pendingAmount": 55000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-09-29T14:30:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 80000,
+                        "_id": "68d2c7e113674f014f0ec22d"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_harsh_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_harsh.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_harsh.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7e113674f014f0ec22c",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:33.646Z",
+            "updatedAt": "2025-09-23T16:16:33.646Z"
+        },
+        {
+            "personal": {
+                "name": "Sneha Kulkarni",
+                "phone": "91-9876500177",
+                "email": "sneha.kulkarni@example.com",
+                "age": 28,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "L-45, Borivali West, Mumbai",
+                "visitDate": "2025-09-29T11:00:00.000Z",
+                "reference": "Muskan",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "Dust",
+                "medicalHistory": "UNKNOWN",
+                "bloodGroup": "O-",
+                "sugar": "95 mg/dL",
+                "bp": "116/75 mmHg",
+                "pulse": "70 bpm",
+                "weight": "56 kg"
+            },
+            "counselling": {
+                "counsellor": "Srishti",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 1700,
+                "packageQuoted": 120000,
+                "readyForSurgery": false,
+                "notes": "Needs weekend slot",
+                "medicines": [
+                    "Iron supplements"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-20T11:30:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 1700,
+                "graftsImplanted": 1650,
+                "donorCondition": "Fair",
+                "doctor": "Pranav",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Arjun Kapoor",
+                "helper": "Rekha Yadav"
+            },
+            "payments": {
+                "totalQuoted": 120000,
+                "amountReceived": 50000,
+                "pendingAmount": 70000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-29T12:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c7e113674f014f0ec22b"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_sneha_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_sneha.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_sneha.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "NEW"
+            },
+            "_id": "68d2c7e113674f014f0ec22a",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:33.646Z",
+            "updatedAt": "2025-09-23T16:16:33.646Z"
+        },
+        {
+            "personal": {
+                "name": "Deepak Verma",
+                "phone": "91-9876500166",
+                "email": "deepak.verma@example.com",
+                "age": 36,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "M-12, Janakpuri, New Delhi",
+                "visitDate": "2025-09-28T14:00:00.000Z",
+                "reference": "Nandani",
+                "package": "Hybrid Package"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "B+",
+                "sugar": "97 mg/dL",
+                "bp": "118/76 mmHg",
+                "pulse": "72 bpm",
+                "weight": "79 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "HYBRID",
+                "graftsSuggested": 2400,
+                "packageQuoted": 150000,
+                "readyForSurgery": true,
+                "notes": "Wants post-op stay included",
+                "medicines": [
+                    "Biotin"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-19T09:00:00.000Z",
+                "technique": "HYBRID",
+                "graftsPlanned": 2400,
+                "graftsImplanted": 2350,
+                "donorCondition": "Good",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Advait Joshi",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Amit Sharma"
+            },
+            "payments": {
+                "totalQuoted": 150000,
+                "amountReceived": 90000,
+                "pendingAmount": 60000,
+                "medicineAmount": 4000,
+                "transactions": [
+                    {
+                        "date": "2025-09-28T15:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 90000,
+                        "_id": "68d2c7e113674f014f0ec229"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_deepak_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_deepak.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_deepak.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7e113674f014f0ec228",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:33.646Z",
+            "updatedAt": "2025-09-23T16:16:33.646Z"
+        },
+        {
+            "personal": {
+                "name": "Ishita Sharma",
+                "phone": "91-9876500155",
+                "email": "ishita.sharma@example.com",
+                "age": 25,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "P-89, Malad West, Mumbai",
+                "visitDate": "2025-09-28T10:30:00.000Z",
+                "reference": "Aisha",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "Eggs",
+                "medicalHistory": "NO",
+                "bloodGroup": "A-",
+                "sugar": "94 mg/dL",
+                "bp": "115/75 mmHg",
+                "pulse": "70 bpm",
+                "weight": "54 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 1500,
+                "packageQuoted": 110000,
+                "readyForSurgery": false,
+                "notes": "Wants all-female OT team",
+                "medicines": [
+                    "Iron"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-18T10:00:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 1500,
+                "graftsImplanted": 1480,
+                "donorCondition": "Fair",
+                "doctor": "Srishti",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Anika Desai",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Sneha Kapoor"
+            },
+            "payments": {
+                "totalQuoted": 110000,
+                "amountReceived": 60000,
+                "pendingAmount": 50000,
+                "medicineAmount": 2000,
+                "transactions": [
+                    {
+                        "date": "2025-09-28T11:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c7d713674f014f0ec226"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_ishita_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_ishita.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_ishita.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "NEW"
+            },
+            "_id": "68d2c7d713674f014f0ec225",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:23.323Z",
+            "updatedAt": "2025-09-23T16:16:23.323Z"
+        },
+        {
+            "personal": {
+                "name": "Pooja Reddy",
+                "phone": "91-9876500111",
+                "email": "pooja.reddy@example.com",
+                "age": 30,
+                "gender": "FEMALE",
+                "location": "Hyderabad",
+                "address": "A-34, Banjara Hills, Hyderabad",
+                "visitDate": "2025-09-26T10:00:00.000Z",
+                "reference": "Anam",
+                "package": "Indian DHI"
+            },
+            "medical": {
+                "allergies": "Milk",
+                "medicalHistory": "NO",
+                "bloodGroup": "A+",
+                "sugar": "93 mg/dL",
+                "bp": "116/74 mmHg",
+                "pulse": "70 bpm",
+                "weight": "57 kg"
+            },
+            "counselling": {
+                "counsellor": "Srishti",
+                "techniqueSuggested": "INDIAN DHI",
+                "graftsSuggested": 1600,
+                "packageQuoted": 120000,
+                "readyForSurgery": false,
+                "notes": "Considering surgery after Diwali",
+                "medicines": [
+                    "Biotin"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-12T09:30:00.000Z",
+                "technique": "INDIAN DHI",
+                "graftsPlanned": 1600,
+                "graftsImplanted": 1580,
+                "donorCondition": "Fair",
+                "doctor": "Pranav",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Arjun Kapoor",
+                "helper": "Mehul Singh"
+            },
+            "payments": {
+                "totalQuoted": 120000,
+                "amountReceived": 40000,
+                "pendingAmount": 80000,
+                "medicineAmount": 2000,
+                "transactions": [
+                    {
+                        "date": "2025-09-26T11:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 40000,
+                        "_id": "68d2c7d713674f014f0ec21e"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_pooja_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_pooja.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_pooja.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7d713674f014f0ec21d",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:23.322Z",
+            "updatedAt": "2025-09-23T16:16:23.322Z"
+        },
+        {
+            "personal": {
+                "name": "Sandeep Yadav",
+                "phone": "91-9876500144",
+                "email": "sandeep.yadav@example.com",
+                "age": 41,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "E-21, Dwarka, New Delhi",
+                "visitDate": "2025-09-27T13:00:00.000Z",
+                "reference": "Nishi",
+                "package": "Standard FUE"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "YES",
+                "bloodGroup": "O+",
+                "sugar": "100 mg/dL",
+                "bp": "120/80 mmHg",
+                "pulse": "72 bpm",
+                "weight": "82 kg"
+            },
+            "counselling": {
+                "counsellor": "Sonu sharma",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 1900,
+                "packageQuoted": 125000,
+                "readyForSurgery": true,
+                "notes": "Requested earliest available OT",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-16T09:30:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 1900,
+                "graftsImplanted": 1880,
+                "donorCondition": "Strong",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Kavya Srinivasan",
+                "helper": "Alok Mishra"
+            },
+            "payments": {
+                "totalQuoted": 125000,
+                "amountReceived": 90000,
+                "pendingAmount": 35000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-27T14:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 90000,
+                        "_id": "68d2c7d713674f014f0ec224"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_sandeep_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_sandeep.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_sandeep.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7d713674f014f0ec223",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:23.322Z",
+            "updatedAt": "2025-09-23T16:16:23.322Z"
+        },
+        {
+            "personal": {
+                "name": "Rhea Malhotra",
+                "phone": "91-9876500133",
+                "email": "rhea.malhotra@example.com",
+                "age": 27,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "K-56, Colaba, Mumbai",
+                "visitDate": "2025-09-27T11:00:00.000Z",
+                "reference": "Anjali",
+                "package": "Hybrid Package"
+            },
+            "medical": {
+                "allergies": "Peanuts",
+                "medicalHistory": "UNKNOWN",
+                "bloodGroup": "AB+",
+                "sugar": "92 mg/dL",
+                "bp": "116/75 mmHg",
+                "pulse": "70 bpm",
+                "weight": "60 kg"
+            },
+            "counselling": {
+                "counsellor": "Gulnaaz salmani",
+                "techniqueSuggested": "HYBRID",
+                "graftsSuggested": 2200,
+                "packageQuoted": 145000,
+                "readyForSurgery": false,
+                "notes": "Needs EMI discussion",
+                "medicines": [
+                    "Biotin",
+                    "Multivitamins"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-15T10:00:00.000Z",
+                "technique": "HYBRID",
+                "graftsPlanned": 2200,
+                "graftsImplanted": 2150,
+                "donorCondition": "Good",
+                "doctor": "Srishti",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Karan Kapoor"
+            },
+            "payments": {
+                "totalQuoted": 145000,
+                "amountReceived": 50000,
+                "pendingAmount": 95000,
+                "medicineAmount": 3500,
+                "transactions": [
+                    {
+                        "date": "2025-09-27T12:00:00.000Z",
+                        "method": "Card",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c7d713674f014f0ec222"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_rhea_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_rhea.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_rhea.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7d713674f014f0ec221",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:23.322Z",
+            "updatedAt": "2025-09-23T16:16:23.322Z"
+        },
+        {
+            "personal": {
+                "name": "Vikram Chauhan",
+                "phone": "91-9876500122",
+                "email": "vikram.chauhan@example.com",
+                "age": 38,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "B-45, Vasant Kunj, New Delhi",
+                "visitDate": "2025-09-26T12:00:00.000Z",
+                "reference": "Ryan",
+                "package": "Sapphire FUE"
+            },
+            "medical": {
+                "allergies": "Dust",
+                "medicalHistory": "NO",
+                "bloodGroup": "B-",
+                "sugar": "99 mg/dL",
+                "bp": "119/78 mmHg",
+                "pulse": "72 bpm",
+                "weight": "74 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 2000,
+                "packageQuoted": 130000,
+                "readyForSurgery": true,
+                "notes": "Prefers early morning slot",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-13T09:00:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 2000,
+                "graftsImplanted": 1980,
+                "donorCondition": "Good",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Priya Singh",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Rohit Malhotra"
+            },
+            "payments": {
+                "totalQuoted": 130000,
+                "amountReceived": 70000,
+                "pendingAmount": 60000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-09-26T13:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 70000,
+                        "_id": "68d2c7d713674f014f0ec220"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_vikram_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_vikram.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_vikram.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7d713674f014f0ec21f",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:23.322Z",
+            "updatedAt": "2025-09-23T16:16:23.322Z"
+        },
+        {
+            "personal": {
+                "name": "Manish Gupta",
+                "phone": "91-9876500100",
+                "email": "manish.gupta@example.com",
+                "age": 35,
+                "gender": "MALE",
+                "location": "Mumbai",
+                "address": "K-23, Chembur, Mumbai",
+                "visitDate": "2025-09-25T14:00:00.000Z",
+                "reference": "Rinky",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "Gluten",
+                "medicalHistory": "YES",
+                "bloodGroup": "AB+",
+                "sugar": "105 mg/dL",
+                "bp": "118/76 mmHg",
+                "pulse": "74 bpm",
+                "weight": "78 kg"
+            },
+            "counselling": {
+                "counsellor": "Gulnaaz salmani",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 1900,
+                "packageQuoted": 125000,
+                "readyForSurgery": true,
+                "notes": "Needs weekend date",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-09T09:00:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 1900,
+                "graftsImplanted": 1880,
+                "donorCondition": "Strong",
+                "doctor": "Pranav",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Punit Malhotra"
+            },
+            "payments": {
+                "totalQuoted": 125000,
+                "amountReceived": 75000,
+                "pendingAmount": 50000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-09-25T15:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 75000,
+                        "_id": "68d2c7c213674f014f0ec21b"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_manish_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_manish.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_manish.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7c213674f014f0ec21a",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:02.988Z",
+            "updatedAt": "2025-09-23T16:16:02.988Z"
+        },
+        {
+            "personal": {
+                "name": "Simran Arora",
+                "phone": "91-9876500099",
+                "email": "simran.arora@example.com",
+                "age": 27,
+                "gender": "FEMALE",
+                "location": "Delhi",
+                "address": "G-45, Karol Bagh, New Delhi",
+                "visitDate": "2025-09-25T09:30:00.000Z",
+                "reference": "Nandani",
+                "package": "Indian DHI"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "O-",
+                "sugar": "98 mg/dL",
+                "bp": "115/75 mmHg",
+                "pulse": "72 bpm",
+                "weight": "52 kg"
+            },
+            "counselling": {
+                "counsellor": "Sonu sharma",
+                "techniqueSuggested": "INDIAN DHI",
+                "graftsSuggested": 1500,
+                "packageQuoted": 115000,
+                "readyForSurgery": false,
+                "notes": "Will confirm after discussion",
+                "medicines": [
+                    "Biotin"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-07T11:30:00.000Z",
+                "technique": "INDIAN DHI",
+                "graftsPlanned": 1500,
+                "graftsImplanted": 1480,
+                "donorCondition": "Fair",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Priya Singh",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Ramesh Tiwari"
+            },
+            "payments": {
+                "totalQuoted": 115000,
+                "amountReceived": 60000,
+                "pendingAmount": 55000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-25T10:30:00.000Z",
+                        "method": "Card",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c7c213674f014f0ec219"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_simran_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_simran.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_simran.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7c213674f014f0ec218",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:02.988Z",
+            "updatedAt": "2025-09-23T16:16:02.988Z"
+        },
+        {
+            "personal": {
+                "name": "Rajat Deshmukh",
+                "phone": "91-9876500088",
+                "email": "rajat.deshmukh@example.com",
+                "age": 42,
+                "gender": "MALE",
+                "location": "Hyderabad",
+                "address": "H-54, Madhapur, Hyderabad",
+                "visitDate": "2025-09-24T12:15:00.000Z",
+                "reference": "Ryan",
+                "package": "Sapphire FUE"
+            },
+            "medical": {
+                "allergies": "Dust",
+                "medicalHistory": "NO",
+                "bloodGroup": "B+",
+                "sugar": "95 mg/dL",
+                "bp": "120/78 mmHg",
+                "pulse": "70 bpm",
+                "weight": "76 kg"
+            },
+            "counselling": {
+                "counsellor": "Mukul Tyagi",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 2100,
+                "packageQuoted": 135000,
+                "readyForSurgery": true,
+                "notes": "Requested Saturday surgery",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-08T09:30:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 2100,
+                "graftsImplanted": 2050,
+                "donorCondition": "Good",
+                "doctor": "Srishti",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Arjun Kapoor",
+                "helper": "Manoj Iyer"
+            },
+            "payments": {
+                "totalQuoted": 135000,
+                "amountReceived": 70000,
+                "pendingAmount": 65000,
+                "medicineAmount": 4000,
+                "transactions": [
+                    {
+                        "date": "2025-09-24T13:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 70000,
+                        "_id": "68d2c7c213674f014f0ec217"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_rajat_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_rajat.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_rajat.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "READY"
+            },
+            "_id": "68d2c7c213674f014f0ec216",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:02.988Z",
+            "updatedAt": "2025-09-23T16:16:02.988Z"
+        },
+        {
+            "personal": {
+                "name": "Kavita Nair",
+                "phone": "91-9876500077",
+                "email": "kavita.nair@example.com",
+                "age": 29,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "A-78, Worli, Mumbai",
+                "visitDate": "2025-09-24T10:30:00.000Z",
+                "reference": "Muskan",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "Peanuts",
+                "medicalHistory": "YES",
+                "bloodGroup": "A+",
+                "sugar": "101 mg/dL",
+                "bp": "117/76 mmHg",
+                "pulse": "71 bpm",
+                "weight": "59 kg"
+            },
+            "counselling": {
+                "counsellor": "Srishti",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 1700,
+                "packageQuoted": 120000,
+                "readyForSurgery": false,
+                "notes": "Wants female OT staff",
+                "medicines": [
+                    "Biotin",
+                    "Iron"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-06T11:00:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 1700,
+                "graftsImplanted": 1680,
+                "donorCondition": "Fair",
+                "doctor": "Pranav",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Snehal Singh"
+            },
+            "payments": {
+                "totalQuoted": 120000,
+                "amountReceived": 50000,
+                "pendingAmount": 70000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-09-24T11:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c7c213674f014f0ec215"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_kavita_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_kavita.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_kavita.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "NEW"
+            },
+            "_id": "68d2c7c213674f014f0ec214",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:02.988Z",
+            "updatedAt": "2025-09-23T16:16:02.988Z"
+        },
+        {
+            "personal": {
+                "name": "Ankit Bansal",
+                "phone": "91-9876500066",
+                "email": "ankit.bansal@example.com",
+                "age": 32,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "C-101, Patel Nagar, New Delhi",
+                "visitDate": "2025-09-23T14:00:00.000Z",
+                "reference": "Anam",
+                "package": "Hybrid Package"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "O+",
+                "sugar": "96 mg/dL",
+                "bp": "118/80 mmHg",
+                "pulse": "72 bpm",
+                "weight": "73 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "HYBRID",
+                "graftsSuggested": 2400,
+                "packageQuoted": 155000,
+                "readyForSurgery": true,
+                "notes": "Requested earliest surgery date",
+                "medicines": [
+                    "Finasteride"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-04T09:00:00.000Z",
+                "technique": "HYBRID",
+                "graftsPlanned": 2400,
+                "graftsImplanted": 2300,
+                "donorCondition": "Good",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Advait Joshi",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Ritu Choudhary",
+                "helper": "Mohit Yadav"
+            },
+            "payments": {
+                "totalQuoted": 155000,
+                "amountReceived": 80000,
+                "pendingAmount": 75000,
+                "medicineAmount": 4000,
+                "transactions": [
+                    {
+                        "date": "2025-09-23T15:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 80000,
+                        "_id": "68d2c7c213674f014f0ec213"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_ankit_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_ankit.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_ankit.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7c213674f014f0ec212",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:16:02.986Z",
+            "updatedAt": "2025-09-23T16:16:02.986Z"
+        },
+        {
+            "personal": {
+                "name": "Varun Malhotra",
+                "phone": "91-9876500055",
+                "email": "varun.malhotra@example.com",
+                "age": 39,
+                "gender": "MALE",
+                "location": "Mumbai",
+                "address": "E-88, Juhu, Mumbai",
+                "visitDate": "2025-09-23T10:15:00.000Z",
+                "reference": "Aisha",
+                "package": "Sapphire FUE"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "B+",
+                "sugar": "94 mg/dL",
+                "bp": "119/78 mmHg",
+                "pulse": "70 bpm",
+                "weight": "77 kg"
+            },
+            "counselling": {
+                "counsellor": "Gulnaaz salmani",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 2100,
+                "packageQuoted": 140000,
+                "readyForSurgery": true,
+                "notes": "Flexible with date",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-03T09:30:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 2100,
+                "graftsImplanted": 2080,
+                "donorCondition": "Good",
+                "doctor": "Pranav",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Anika Desai",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Kavya Srinivasan",
+                "helper": "Sunil Arora"
+            },
+            "payments": {
+                "totalQuoted": 140000,
+                "amountReceived": 100000,
+                "pendingAmount": 40000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-23T11:30:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 100000,
+                        "_id": "68d2c7b413674f014f0ec210"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_varun_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_varun.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_varun.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7b413674f014f0ec20f",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:15:48.469Z",
+            "updatedAt": "2025-09-23T16:15:48.469Z"
+        },
+        {
+            "personal": {
+                "name": "Meera Iyer",
+                "phone": "91-9876500044",
+                "email": "meera.iyer@example.com",
+                "age": 26,
+                "gender": "FEMALE",
+                "location": "Delhi",
+                "address": "F-33, Hauz Khas, New Delhi",
+                "visitDate": "2025-09-22T11:00:00.000Z",
+                "reference": "Nishi",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "Seafood",
+                "medicalHistory": "UNKNOWN",
+                "bloodGroup": "O+",
+                "sugar": "100 mg/dL",
+                "bp": "116/74 mmHg",
+                "pulse": "71 bpm",
+                "weight": "55 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 1600,
+                "packageQuoted": 130000,
+                "readyForSurgery": false,
+                "notes": "Needs consultation with family",
+                "medicines": [
+                    "Iron supplements"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-02T11:00:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 1600,
+                "graftsImplanted": 1580,
+                "donorCondition": "Fair",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Advait Joshi",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Swati Bansal"
+            },
+            "payments": {
+                "totalQuoted": 130000,
+                "amountReceived": 60000,
+                "pendingAmount": 70000,
+                "medicineAmount": 2000,
+                "transactions": [
+                    {
+                        "date": "2025-09-22T12:00:00.000Z",
+                        "method": "Card",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c7b413674f014f0ec20e"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_meera_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_meera.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_meera.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "NEW"
+            },
+            "_id": "68d2c7b413674f014f0ec20d",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:15:48.469Z",
+            "updatedAt": "2025-09-23T16:15:48.469Z"
+        },
+        {
+            "personal": {
+                "name": "Rahul Joshi",
+                "phone": "91-9876500033",
+                "email": "rahul.joshi@example.com",
+                "age": 37,
+                "gender": "MALE",
+                "location": "Hyderabad",
+                "address": "C-22, Jubilee Hills, Hyderabad",
+                "visitDate": "2025-09-22T09:30:00.000Z",
+                "reference": "Rinky",
+                "package": "Hybrid Package"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "AB-",
+                "sugar": "90 mg/dL",
+                "bp": "117/76 mmHg",
+                "pulse": "73 bpm",
+                "weight": "72 kg"
+            },
+            "counselling": {
+                "counsellor": "Mukul Tyagi",
+                "techniqueSuggested": "HYBRID",
+                "graftsSuggested": 2300,
+                "packageQuoted": 145000,
+                "readyForSurgery": true,
+                "notes": "Patient wants fast recovery",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-01T09:00:00.000Z",
+                "technique": "HYBRID",
+                "graftsPlanned": 2300,
+                "graftsImplanted": 2250,
+                "donorCondition": "Strong",
+                "doctor": "Srishti",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Priya Singh",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Ritu Choudhary",
+                "helper": "Deepak Verma"
+            },
+            "payments": {
+                "totalQuoted": 145000,
+                "amountReceived": 90000,
+                "pendingAmount": 55000,
+                "medicineAmount": 3500,
+                "transactions": [
+                    {
+                        "date": "2025-09-22T10:30:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 90000,
+                        "_id": "68d2c7b413674f014f0ec20c"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_rahul_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_rahul.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_rahul.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "READY"
+            },
+            "_id": "68d2c7b413674f014f0ec20b",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:15:48.468Z",
+            "updatedAt": "2025-09-23T16:15:48.468Z"
+        },
+        {
+            "personal": {
+                "name": "Shreya Kapoor",
+                "phone": "91-9876500022",
+                "email": "shreya.kapoor@example.com",
+                "age": 31,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "D-67, Bandra East, Mumbai",
+                "visitDate": "2025-09-21T11:00:00.000Z",
+                "reference": "Nikita yadav",
+                "package": "Indian DHI"
+            },
+            "medical": {
+                "allergies": "Pollen",
+                "medicalHistory": "YES",
+                "bloodGroup": "B-",
+                "sugar": "104 mg/dL",
+                "bp": "115/75 mmHg",
+                "pulse": "69 bpm",
+                "weight": "58 kg"
+            },
+            "counselling": {
+                "counsellor": "Srishti",
+                "techniqueSuggested": "INDIAN DHI",
+                "graftsSuggested": 2000,
+                "packageQuoted": 125000,
+                "readyForSurgery": true,
+                "notes": "Interested in EMI",
+                "medicines": [
+                    "Multivitamins"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-09-29T10:30:00.000Z",
+                "technique": "INDIAN DHI",
+                "graftsPlanned": 2000,
+                "graftsImplanted": 1950,
+                "donorCondition": "Fair",
+                "doctor": "Pranav",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Komal Sharma"
+            },
+            "payments": {
+                "totalQuoted": 125000,
+                "amountReceived": 70000,
+                "pendingAmount": 55000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-09-21T12:30:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 70000,
+                        "_id": "68d2c7b413674f014f0ec20a"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_shreya_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_shreya.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_shreya.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c7b413674f014f0ec209",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:15:48.468Z",
+            "updatedAt": "2025-09-23T16:15:48.468Z"
+        },
+        {
+            "personal": {
+                "name": "Amit Khanna",
+                "phone": "91-9876500011",
+                "email": "amit.khanna@example.com",
+                "age": 34,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "H-12, Green Park, New Delhi",
+                "visitDate": "2025-09-21T10:00:00.000Z",
+                "reference": "Anjali",
+                "package": "Standard FUE"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "A-",
+                "sugar": "97 mg/dL",
+                "bp": "118/79 mmHg",
+                "pulse": "72 bpm",
+                "weight": "70 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 1800,
+                "packageQuoted": 110000,
+                "readyForSurgery": false,
+                "notes": "Prefers weekday surgery",
+                "medicines": [
+                    "Biotin"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-09-28T09:30:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 1800,
+                "graftsImplanted": 1750,
+                "donorCondition": "Good",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Rohit Sinha"
+            },
+            "payments": {
+                "totalQuoted": 110000,
+                "amountReceived": 50000,
+                "pendingAmount": 60000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-21T12:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c7b413674f014f0ec208"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_amit_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_amit.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_amit.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c7b413674f014f0ec207",
+            "__v": 0,
+            "createdAt": "2025-09-23T16:15:48.467Z",
+            "updatedAt": "2025-09-23T16:15:48.467Z"
+        },
+        {
+            "personal": {
+                "name": "Kunal Mehta",
+                "phone": "91-9876543254",
+                "email": "kunal.mehta@example.com",
+                "age": 40,
+                "gender": "MALE",
+                "location": "Mumbai",
+                "address": "F-78, Powai, Mumbai",
+                "visitDate": "2025-09-20T15:30:00.000Z",
+                "reference": "Rinky",
+                "package": "DHI"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "O-",
+                "sugar": "95 mg/dL",
+                "bp": "122/82 mmHg",
+                "pulse": "76 bpm",
+                "weight": "80 kg"
+            },
+            "counselling": {
+                "counsellor": "Mukul Tyagi",
+                "techniqueSuggested": "DHI",
+                "graftsSuggested": 2000,
+                "packageQuoted": 140000,
+                "readyForSurgery": false,
+                "notes": "Needs family approval",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-10-05T10:30:00.000Z",
+                "technique": "DHI",
+                "graftsPlanned": 2000,
+                "graftsImplanted": 1980,
+                "donorCondition": "Good",
+                "doctor": "Srishti",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Anika Desai",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Ritu Choudhary",
+                "helper": "Vikas Malhotra"
+            },
+            "payments": {
+                "totalQuoted": 140000,
+                "amountReceived": 70000,
+                "pendingAmount": 70000,
+                "medicineAmount": 2500,
+                "transactions": [
+                    {
+                        "date": "2025-09-20T16:00:00.000Z",
+                        "method": "Card",
+                        "service": "Advance",
+                        "amount": 70000,
+                        "_id": "68d2c18013674f014f0ec205"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_kunal_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_kunal.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_kunal.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c18013674f014f0ec204",
+            "__v": 0,
+            "createdAt": "2025-09-23T15:49:20.264Z",
+            "updatedAt": "2025-09-23T15:49:20.264Z"
+        },
+        {
+            "personal": {
+                "name": "Neha Gupta",
+                "phone": "91-9876543243",
+                "email": "neha.gupta@example.com",
+                "age": 28,
+                "gender": "FEMALE",
+                "location": "Delhi",
+                "address": "E-56, Rohini Sector 9, Delhi",
+                "visitDate": "2025-09-19T09:45:00.000Z",
+                "reference": "Aisha",
+                "package": "Standard FUE"
+            },
+            "medical": {
+                "allergies": "Penicillin",
+                "medicalHistory": "NO",
+                "bloodGroup": "A+",
+                "sugar": "92 mg/dL",
+                "bp": "114/76 mmHg",
+                "pulse": "68 bpm",
+                "weight": "54 kg"
+            },
+            "counselling": {
+                "counsellor": "Gulnaaz salmani",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 1500,
+                "packageQuoted": 100000,
+                "readyForSurgery": true,
+                "notes": "Patient wants female doctor",
+                "medicines": [
+                    "Multivitamins"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-09-29T09:00:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 1500,
+                "graftsImplanted": 1450,
+                "donorCondition": "Weak",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Rajesh Kumar",
+                "implanterRight": "Priya Singh",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Kavya Srinivasan",
+                "helper": "Pooja Bansal"
+            },
+            "payments": {
+                "totalQuoted": 100000,
+                "amountReceived": 50000,
+                "pendingAmount": 50000,
+                "medicineAmount": 2000,
+                "transactions": [
+                    {
+                        "date": "2025-09-19T10:30:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c18013674f014f0ec203"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_neha_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_neha.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_neha.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c18013674f014f0ec202",
+            "__v": 0,
+            "createdAt": "2025-09-23T15:49:20.264Z",
+            "updatedAt": "2025-09-23T15:49:20.264Z"
+        },
+        {
+            "personal": {
+                "name": "Arjun Nair",
+                "phone": "91-9876543232",
+                "email": "arjun.nair@example.com",
+                "age": 36,
+                "gender": "MALE",
+                "location": "Hyderabad",
+                "address": "C-89, Banjara Hills, Hyderabad",
+                "visitDate": "2025-09-18T11:15:00.000Z",
+                "reference": "Ryan",
+                "package": "Hybrid Package"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "UNKNOWN",
+                "bloodGroup": "AB+",
+                "sugar": "99 mg/dL",
+                "bp": "116/74 mmHg",
+                "pulse": "74 bpm",
+                "weight": "75 kg"
+            },
+            "counselling": {
+                "counsellor": "Pranendra singh",
+                "techniqueSuggested": "HYBRID",
+                "graftsSuggested": 2500,
+                "packageQuoted": 150000,
+                "readyForSurgery": false,
+                "notes": "Considering travel package",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-09-30T11:00:00.000Z",
+                "technique": "HYBRID",
+                "graftsPlanned": 2500,
+                "graftsImplanted": 2400,
+                "donorCondition": "Strong",
+                "doctor": "Srishti",
+                "seniorTech": "Advait Joshi",
+                "implanterRight": "Anika Desai",
+                "implanterLeft": "Sneha Gupta",
+                "graftingPerson": "Sameer Ali",
+                "helper": "Ravi Sharma"
+            },
+            "payments": {
+                "totalQuoted": 150000,
+                "amountReceived": 100000,
+                "pendingAmount": 50000,
+                "medicineAmount": 4000,
+                "transactions": [
+                    {
+                        "date": "2025-09-18T13:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c18013674f014f0ec200"
+                    },
+                    {
+                        "date": "2025-09-20T09:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Second Installment",
+                        "amount": 40000,
+                        "_id": "68d2c18013674f014f0ec201"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_arjun_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_arjun.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_arjun.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "COUNSELLING"
+            },
+            "_id": "68d2c18013674f014f0ec1ff",
+            "__v": 0,
+            "createdAt": "2025-09-23T15:49:20.263Z",
+            "updatedAt": "2025-09-23T15:49:20.263Z"
+        },
+        {
+            "personal": {
+                "name": "Priya Sharma",
+                "phone": "91-9876543221",
+                "email": "priya.sharma@example.com",
+                "age": 33,
+                "gender": "FEMALE",
+                "location": "Mumbai",
+                "address": "B-12, Andheri West, Mumbai",
+                "visitDate": "2025-09-17T14:00:00.000Z",
+                "reference": "Muskan",
+                "package": "Indian DHI"
+            },
+            "medical": {
+                "allergies": "Dust",
+                "medicalHistory": "YES",
+                "bloodGroup": "O+",
+                "sugar": "102 mg/dL",
+                "bp": "118/78 mmHg",
+                "pulse": "70 bpm",
+                "weight": "60 kg"
+            },
+            "counselling": {
+                "counsellor": "Sonu sharma",
+                "techniqueSuggested": "INDIAN DHI",
+                "graftsSuggested": 1800,
+                "packageQuoted": 135000,
+                "readyForSurgery": true,
+                "notes": "Wants EMI option",
+                "medicines": [
+                    "Biotin",
+                    "Finasteride"
+                ]
+            },
+            "surgery": {
+                "surgeryDate": "2025-09-27T10:00:00.000Z",
+                "technique": "INDIAN DHI",
+                "graftsPlanned": 1800,
+                "graftsImplanted": 1750,
+                "donorCondition": "Average",
+                "doctor": "Pranav",
+                "seniorTech": "Vihaan Patel",
+                "implanterRight": "Rohan Mehta",
+                "implanterLeft": "Deepika Nair",
+                "graftingPerson": "Arjun Kapoor",
+                "helper": "Manish Tiwari"
+            },
+            "payments": {
+                "totalQuoted": 135000,
+                "amountReceived": 80000,
+                "pendingAmount": 55000,
+                "medicineAmount": 3000,
+                "transactions": [
+                    {
+                        "date": "2025-09-17T15:00:00.000Z",
+                        "method": "UPI",
+                        "service": "Advance",
+                        "amount": 50000,
+                        "_id": "68d2c18013674f014f0ec1fd"
+                    },
+                    {
+                        "date": "2025-09-18T10:00:00.000Z",
+                        "method": "Card",
+                        "service": "EMI",
+                        "amount": 30000,
+                        "_id": "68d2c18013674f014f0ec1fe"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_priya_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_priya.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_priya.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "SURGERY_SCHEDULED"
+            },
+            "_id": "68d2c18013674f014f0ec1fc",
+            "__v": 0,
+            "createdAt": "2025-09-23T15:49:20.263Z",
+            "updatedAt": "2025-09-23T15:49:20.263Z"
+        },
+        {
+            "personal": {
+                "name": "Rohit Verma",
+                "phone": "91-9876543210",
+                "email": "rohit.verma@example.com",
+                "age": 29,
+                "gender": "MALE",
+                "location": "Delhi",
+                "address": "A-45, Lajpat Nagar, New Delhi",
+                "visitDate": "2025-09-15T10:30:00.000Z",
+                "reference": "Nandani",
+                "package": "Sapphire FUE"
+            },
+            "medical": {
+                "allergies": "None",
+                "medicalHistory": "NO",
+                "bloodGroup": "B+",
+                "sugar": "96 mg/dL",
+                "bp": "120/80 mmHg",
+                "pulse": "72 bpm",
+                "weight": "68 kg"
+            },
+            "counselling": {
+                "counsellor": "Ali",
+                "techniqueSuggested": "FUE",
+                "graftsSuggested": 2200,
+                "packageQuoted": 120000,
+                "readyForSurgery": false,
+                "notes": "Patient prefers weekend slot",
+                "medicines": []
+            },
+            "surgery": {
+                "surgeryDate": "2025-09-25T09:00:00.000Z",
+                "technique": "FUE",
+                "graftsPlanned": 2200,
+                "graftsImplanted": 2100,
+                "donorCondition": "Good",
+                "doctor": "Pranendra singh",
+                "seniorTech": "Aarav Sharma",
+                "implanterRight": "Karthik Iyer",
+                "implanterLeft": "Neha Reddy",
+                "graftingPerson": "Zara Ahmed",
+                "helper": "Sanjay Kumar"
+            },
+            "payments": {
+                "totalQuoted": 120000,
+                "amountReceived": 60000,
+                "pendingAmount": 60000,
+                "medicineAmount": 5000,
+                "transactions": [
+                    {
+                        "date": "2025-09-15T12:00:00.000Z",
+                        "method": "Cash",
+                        "service": "Advance",
+                        "amount": 60000,
+                        "_id": "68d2c18013674f014f0ec1fb"
+                    }
+                ]
+            },
+            "documents": {
+                "images": [
+                    "img_rohit_1.png"
+                ],
+                "suregeryForm": [
+                    "surgery_form_rohit.pdf"
+                ],
+                "consultForm": [
+                    "consult_form_rohit.pdf"
+                ]
+            },
+            "ops": {
+                "createdBy": "64f10e1bc9027111e92c8536",
+                "status": "READY"
+            },
+            "_id": "68d2c18013674f014f0ec1fa",
+            "__v": 0,
+            "createdAt": "2025-09-23T15:49:20.261Z",
+            "updatedAt": "2025-09-23T15:49:20.261Z"
+        }
+    ]
+}

@@ -8,29 +8,29 @@ export async function POST(req) {
   const data = await req.json();
   const { branch = "All", from, to } = data;
 
+  console.log(data);
+
   // ✅ Common filter for branch
   const branchFilter = branch === "All" ? {} : { "personal.location": branch };
 
-  // ✅ Handle date range - from is required, to defaults to today
-  if (!from) {
-    return NextResponse.json(
-      { error: "From date is required" }, 
-      { status: 400 }
-    );
-  }
+  // ✅ Default dates → today if not provided
+  const today = new Date();
+  const defaultFrom = new Date(today);
+  defaultFrom.setHours(0, 0, 0, 0); // start of today
 
-  const fromDate = new Date(from);
-  // Set time to start of day (00:00:00)
+  const defaultTo = new Date(today);
+  defaultTo.setHours(23, 59, 59, 999); // end of today
+
+  const fromDate = from ? new Date(from) : defaultFrom;
   fromDate.setHours(0, 0, 0, 0);
 
-  const toDate = to ? new Date(to) : new Date();
-  // Set time to end of day (23:59:59)
+  const toDate = to ? new Date(to) : defaultTo;
   toDate.setHours(23, 59, 59, 999);
 
   // ✅ Date range filter
   const dateRangeFilter = {
     $gte: fromDate,
-    $lte: toDate
+    $lte: toDate,
   };
 
   // ✅ Run all queries in parallel
@@ -115,9 +115,10 @@ export async function POST(req) {
 
   return NextResponse.json({
     dateRange: {
-      from: fromDate.toISOString().split('T')[0],
-      to: toDate.toISOString().split('T')[0]
+      from: fromDate.toISOString().split("T")[0],
+      to: toDate.toISOString().split("T")[0],
     },
+    branch: branch === "All" ? "All" : branch,
     appointments: [appointmentsCount, appointmentsDocs],
     visited: [visitedCount, visitedDocs],
     surgeryConfirmations: [surgeryConfirmCount, surgeryConfirmDocs],

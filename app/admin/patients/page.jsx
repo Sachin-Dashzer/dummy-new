@@ -1,13 +1,12 @@
 "use client";
 
-"use client";
-
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
+import { Filter, X, ChevronRight, ChevronLeft } from "lucide-react";
 
-// Constants
+/* -------------------- Constants -------------------- */
 const STATUS_OPTIONS = [
   "NEW",
   "COUNSELLING",
@@ -16,7 +15,15 @@ const STATUS_OPTIONS = [
   "POST_OP",
   "CLOSED",
 ];
-const LOCATION_OPTIONS = ["Mumbai", "Delhi", "Hyderabad"];
+const STATUS_COLORS = {
+  NEW: "bg-blue-100 text-blue-800",
+  COUNSELLING: "bg-purple-100 text-purple-800",
+  READY: "bg-amber-100 text-amber-800",
+  SURGERY_SCHEDULED: "bg-orange-100 text-orange-800",
+  POST_OP: "bg-emerald-100 text-emerald-800",
+  CLOSED: "bg-gray-100 text-gray-800",
+};
+const LOCATION_OPTIONS = ["Delhi", "Mumbai", "Hyderabad"];
 const PACKAGE_OPTIONS = [
   "Sapphire FUE",
   "PRP",
@@ -26,90 +33,66 @@ const PACKAGE_OPTIONS = [
   "Standard FUE",
   "DHI",
 ];
+const PAYMENT_METHODS = ["CASH", "UPI", "CARD", "TRANSFER"];
 
-// Status badge colors mapping
-const STATUS_COLORS = {
-  NEW: "bg-blue-100 text-blue-800",
-  COUNSELLING: "bg-purple-100 text-purple-800",
-  READY: "bg-yellow-100 text-yellow-800",
-  SURGERY_SCHEDULED: "bg-orange-100 text-orange-800",
-  POST_OP: "bg-green-100 text-green-800",
-  CLOSED: "bg-gray-100 text-gray-800",  
-};
+/* -------------------- Helpers -------------------- */
+const formatDate = (date) =>
+  date
+    ? new Date(date).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : "N/A";
 
+const getInitialFiltersFromURL = (sp) => ({
+  search: "",
+  status: sp.get("status") || "",
+  location: sp.get("branch") || "", // map branch -> location
+  counsellor: sp.get("counsellor") || "",
+  package: sp.get("package") || "",
+  dateFrom: sp.get("dateFrom") || "",
+  dateTo: sp.get("dateTo") || "",
+  agent: "",
+  doctor: "",
+  seniorTech: "",
+  implanter: "",
+  technique: "",
+  paymentMethod: "",
+  surgeryDate: "",
+});
+
+/* ===================================================
+   Patient Dashboard
+=================================================== */
 export default function PatientDashboard() {
   const searchParams = useSearchParams();
+
+  /* ------------ State ------------ */
   const [patients, setPatients] = useState([]);
-  const [filteredPatients, setFilteredPatients] = useState([]);
+  const [filters, setFilters] = useState(() =>
+    getInitialFiltersFromURL(searchParams)
+  );
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-
-  if(!searchParams.get("dateTo")){
-    console.log("npne")
-  }
-  else{
-    console.log("hoeld")
-  }
-
-
-  // Initialize filters with URL parameters if present
-  const [filters, setFilters] = useState({
-    search: "",
-    status: searchParams.get("status") || "",
-    location: "",
-    counsellor: "",
-    package: searchParams.get("package") || "",
-    dateFrom: searchParams.get("dateFrom") || "",
-    dateTo: searchParams.get("dateTo") || "",
-  });
-
-  const [sortConfig, setSortConfig] = useState({
-    key: null,
-    direction: "ascending",
-  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [showFilters, setShowFilters] = useState(
-    !!searchParams.get("status") ||
-      !!searchParams.get("dateFrom") ||
-      !!searchParams.get("package")
-  );
 
-  // Update filters when URL parameters change
-  useEffect(() => {
-    const status = searchParams.get("status");
-    const dateFrom = searchParams.get("dateFrom");
-    const dateTo = searchParams.get("dateTo");
-    const packageFilter = searchParams.get("package");
+  const [sort, setSort] = useState({ key: "personal.visitDate", dir: "desc" });
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
-    if (status || dateFrom || dateTo || packageFilter) {
-      setFilters((prev) => ({
-        ...prev,
-        status: status || prev.status,
-        dateFrom: dateFrom || prev.dateFrom,
-        dateTo: dateTo || prev.dateTo,
-        package: packageFilter || prev.package,
-      }));
-
-      // Auto-show filters when coming from dashboard
-      setShowFilters(true);
-    }
-  }, [searchParams]);
-
-  // Load patient data
+  /* ------------ Data Fetch ------------ */
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const res = await fetch("/api/patients/get-patient");
         if (!res.ok) throw new Error("Failed to fetch patient data");
-
         const data = await res.json();
         setPatients(data.items || []);
-        setFilteredPatients(data.items || []);
-      } catch (err) {
-        setError(err.message);
+      } catch (e) {
+        setError(e.message || "Error");
       } finally {
         setLoading(false);
       }
@@ -117,720 +100,743 @@ export default function PatientDashboard() {
     fetchData();
   }, []);
 
-  // Extract unique counsellors
-  const counsellorOptions = [
-    ...new Set(patients.map((p) => p?.counselling?.counsellor)),
-  ].filter(Boolean);
+  /* ------------ Dynamic options ------------ */
+  const counsellorOptions = useMemo(
+    () =>
+      [...new Set(patients.map((p) => p?.counselling?.counsellor))].filter(
+        Boolean
+      ),
+    [patients]
+  );
+  const doctorOptions = useMemo(
+    () => [...new Set(patients.map((p) => p?.surgery?.doctor))].filter(Boolean),
+    [patients]
+  );
+  const seniorTechOptions = useMemo(
+    () =>
+      [...new Set(patients.map((p) => p?.surgery?.seniorTech))].filter(Boolean),
+    [patients]
+  );
+  const implanterOptions = useMemo(
+    () =>
+      [
+        ...new Set([
+          ...patients.map((p) => p?.surgery?.implanterRight),
+          ...patients.map((p) => p?.surgery?.implanterLeft),
+        ]),
+      ].filter(Boolean),
+    [patients]
+  );
+  const techniqueOptions = useMemo(
+    () =>
+      [
+        ...new Set([
+          ...patients.map((p) => p?.counselling?.techniqueSuggested),
+          ...patients.map((p) => p?.surgery?.technique),
+        ]),
+      ].filter(Boolean),
+    [patients]
+  );
 
-  // Apply filters
-  useEffect(() => {
-    let result = patients;
+  /* ------------ Filtering + Sorting ------------ */
+  const filtered = useMemo(() => {
+    let list = [...patients];
+
+    const includesCI = (a = "", b = "") =>
+      a.toString().toLowerCase().includes(b.toString().toLowerCase());
 
     if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      result = result.filter(
+      const q = filters.search.toLowerCase();
+      list = list.filter(
         (p) =>
-          p.personal.name.toLowerCase().includes(searchLower) ||
-          p.personal.phone.includes(searchLower) ||
-          p.personal.email.toLowerCase().includes(searchLower)
+          includesCI(p?.personal?.name, q) ||
+          includesCI(p?.personal?.phone, q) ||
+          includesCI(p?.personal?.email, q)
       );
     }
-    if (filters.status) {
-      result = result.filter((p) => p.ops.status === filters.status);
-    }
-    if (filters.location) {
-      result = result.filter((p) => p.personal.location === filters.location);
-    }
-    if (filters.counsellor) {
-      result = result.filter(
-        (p) => p.counselling.counsellor === filters.counsellor
+    if (filters.status)
+      list = list.filter((p) => p?.ops?.status === filters.status);
+    if (filters.location)
+      list = list.filter((p) => p?.personal?.location === filters.location);
+    if (filters.counsellor)
+      list = list.filter(
+        (p) => p?.counselling?.counsellor === filters.counsellor
+      );
+    if (filters.package)
+      list = list.filter((p) => p?.personal?.package === filters.package);
+    if (filters.agent)
+      list = list.filter((p) => includesCI(p?.ops?.createdBy, filters.agent));
+    if (filters.doctor)
+      list = list.filter((p) => p?.surgery?.doctor === filters.doctor);
+    if (filters.seniorTech)
+      list = list.filter((p) => p?.surgery?.seniorTech === filters.seniorTech);
+    if (filters.implanter) {
+      list = list.filter(
+        (p) =>
+          p?.surgery?.implanterRight === filters.implanter ||
+          p?.surgery?.implanterLeft === filters.implanter
       );
     }
-    if (filters.package) {
-      result = result.filter((p) => p.personal.package === filters.package);
+    if (filters.technique) {
+      list = list.filter(
+        (p) =>
+          p?.counselling?.techniqueSuggested === filters.technique ||
+          p?.surgery?.technique === filters.technique
+      );
+    }
+    if (filters.paymentMethod) {
+      list = list.filter((p) =>
+        (p?.payments?.transactions || []).some(
+          (t) => t?.method === filters.paymentMethod
+        )
+      );
+    }
+    if (filters.surgeryDate) {
+      const sd = new Date(filters.surgeryDate);
+      const start = new Date(sd);
+      start.setHours(0, 0, 0, 0);
+      const end = new Date(sd);
+      end.setHours(23, 59, 59, 999);
+      list = list.filter((p) => {
+        const d = p?.surgery?.surgeryDate
+          ? new Date(p.surgery.surgeryDate)
+          : null;
+        return d && d >= start && d <= end;
+      });
     }
     if (filters.dateFrom) {
-      const fromDate = new Date(filters.dateFrom);
-      result = result.filter((p) => new Date(p.personal.visitDate) >= fromDate);
+      const from = new Date(filters.dateFrom);
+      list = list.filter((p) => new Date(p?.personal?.visitDate) >= from);
     }
     if (filters.dateTo) {
-      const toDate = new Date(filters.dateTo);
-      toDate.setHours(23, 59, 59, 999);
-      result = result.filter((p) => new Date(p.personal.visitDate) <= toDate);
+      const to = new Date(filters.dateTo);
+      to.setHours(23, 59, 59, 999);
+      list = list.filter((p) => new Date(p?.personal?.visitDate) <= to);
     }
 
-    setFilteredPatients(result);
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [filters, patients]);
-
-  // ... rest of the component remains the same ...
-  // Sorting
-  const handleSort = (key) => {
-    let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-
-    const sorted = [...filteredPatients].sort((a, b) => {
-      const getValue = (obj, key) =>
-        key.split(".").reduce((o, k) => (o ? o[k] : null), obj);
-      const aValue = getValue(a, key);
-      const bValue = getValue(b, key);
-
-      if (aValue < bValue) return direction === "ascending" ? -1 : 1;
-      if (aValue > bValue) return direction === "ascending" ? 1 : -1;
+    // sort
+    const getVal = (obj, key) =>
+      key.split(".").reduce((o, k) => (o ? o[k] : undefined), obj);
+    list.sort((a, b) => {
+      const av = getVal(a, sort.key);
+      const bv = getVal(b, sort.key);
+      if (av == null && bv == null) return 0;
+      if (av == null) return sort.dir === "asc" ? -1 : 1;
+      if (bv == null) return sort.dir === "asc" ? 1 : -1;
+      if (av < bv) return sort.dir === "asc" ? -1 : 1;
+      if (av > bv) return sort.dir === "asc" ? 1 : -1;
       return 0;
     });
 
-    setFilteredPatients(sorted);
-  };
+    return list;
+  }, [patients, filters, sort]);
 
+  /* ------------ Pagination ------------ */
+  const total = filtered.length;
+  const pages = Math.max(1, Math.ceil(total / perPage));
+  const current = Math.min(page, pages);
+  const startIdx = (current - 1) * perPage;
+  const endIdx = Math.min(startIdx + perPage, total);
+  const rows = filtered.slice(startIdx, endIdx);
+
+  useEffect(() => setPage(1), [filters, perPage]);
+
+  /* ------------ UI Actions ------------ */
   const clearFilters = () =>
-    setFilters({
-      search: "",
-      status: "",
-      location: "",
-      counsellor: "",
-      package: "",
-      dateFrom: "",
-      dateTo: "",
-    });
+    setFilters(getInitialFiltersFromURL(new URLSearchParams()));
+  const toggleSort = (key) =>
+    setSort((s) =>
+      s.key === key
+        ? { key, dir: s.dir === "asc" ? "desc" : "asc" }
+        : { key, dir: "asc" }
+    );
 
-  const formatDate = (date) =>
-    date
-      ? new Date(date).toLocaleDateString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        })
-      : "N/A";
+  const activeFilterChips = useMemo(() => {
+    const chips = [];
+    if (filters.status)
+      chips.push({ k: "status", label: `Status: ${filters.status}` });
+    if (filters.location)
+      chips.push({ k: "location", label: `Branch: ${filters.location}` });
+    if (filters.package)
+      chips.push({ k: "package", label: `Package: ${filters.package}` });
+    if (filters.counsellor)
+      chips.push({
+        k: "counsellor",
+        label: `Counsellor: ${filters.counsellor}`,
+      });
+    if (filters.agent)
+      chips.push({ k: "agent", label: `Agent: ${filters.agent}` });
+    if (filters.paymentMethod)
+      chips.push({
+        k: "paymentMethod",
+        label: `Pay: ${filters.paymentMethod}`,
+      });
+    if (filters.technique)
+      chips.push({ k: "technique", label: `Technique: ${filters.technique}` });
+    if (filters.doctor)
+      chips.push({ k: "doctor", label: `Doctor: ${filters.doctor}` });
+    if (filters.seniorTech)
+      chips.push({
+        k: "seniorTech",
+        label: `Senior Tech: ${filters.seniorTech}`,
+      });
+    if (filters.implanter)
+      chips.push({ k: "implanter", label: `Implanter: ${filters.implanter}` });
+    if (filters.surgeryDate)
+      chips.push({
+        k: "surgeryDate",
+        label: `Surgery: ${formatDate(filters.surgeryDate)}`,
+      });
+    if (filters.dateFrom)
+      chips.push({ k: "dateFrom", label: `From: ${filters.dateFrom}` });
+    if (filters.dateTo)
+      chips.push({ k: "dateTo", label: `To: ${filters.dateTo}` });
+    return chips;
+  }, [filters]);
 
-  // Pagination logic
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredPatients.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
-  const totalPages = Math.ceil(filteredPatients.length / itemsPerPage);
+  const removeChip = (k) => setFilters((f) => ({ ...f, [k]: "" }));
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Loading & Error states
+  /* ------------ Render ------------ */
   if (loading)
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin h-10 w-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full" />
       </div>
     );
   if (error)
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="bg-red-50 p-4 rounded-md border border-red-200 text-red-700">
-          <p className="font-medium">Error loading patient data</p>
-          <p className="text-sm mt-1">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-3 px-4 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition"
-          >
-            Try Again
-          </button>
-        </div>
+      <div className="flex h-screen items-center justify-center text-red-600">
+        {error}
       </div>
     );
 
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm sticky top-0 z-10">
-          <div className="px-6 py-4 flex justify-between items-center">
+          <div className="px-6 py-4 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Patient Management
-              </h1>
-              <p className="text-sm text-gray-600 mt-1">
-                Manage and track all patient records
+              <h1 className="text-2xl font-semibold text-gray-900">Patients</h1>
+              <p className="text-sm text-gray-500">
+                Manage and track patient records
               </p>
             </div>
-            <Link
-              href="add-patient"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              New Patient
-            </Link>
-          </div>
-        </header>
-
-        {/* Stats Summary */}
-        <div className="px-4 mt-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center">
-                <div className="rounded-full bg-blue-100 p-3 mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Total Patients
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {patients.length}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center">
-                <div className="rounded-full bg-green-100 p-3 mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-green-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Active Cases
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {patients.filter((p) => p.ops.status !== "CLOSED").length}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center">
-                <div className="rounded-full bg-purple-100 p-3 mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-purple-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Scheduled Today
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {
-                      patients.filter((p) => {
-                        const today = new Date().toDateString();
-                        const visitDate = new Date(
-                          p.personal.visitDate
-                        ).toDateString();
-                        return visitDate === today;
-                      }).length
-                    }
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center">
-                <div className="rounded-full bg-orange-100 p-3 mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-orange-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Need Follow-up
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {
-                      patients.filter((p) => p.ops.status === "COUNSELLING")
-                        .length
-                    }
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Filters Section */}
-        <div className="bg-white shadow-md rounded-lg p-4 m-4">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-3">
               <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
+                onClick={() => setDrawerOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border bg-white shadow-sm hover:bg-gray-50"
               >
-                {showFilters ? "Hide Filters" : "Show Filters"}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 ml-1 transition-transform ${
-                    showFilters ? "rotate-180" : ""
-                  }`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <Filter className="w-4 h-4" />
+                Filters
+                {activeFilterChips.length > 0 && (
+                  <span className="ml-1 text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">
+                    {activeFilterChips.length}
+                  </span>
+                )}
               </button>
+              <Link
+                href="add-patient"
+                className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+              >
+                + New Patient
+              </Link>
+            </div>
+          </div>
+
+          {/* Active filter chips */}
+          {activeFilterChips.length > 0 && (
+            <div className="px-6 pb-3 flex flex-wrap gap-2">
+              {activeFilterChips.map((c) => (
+                <span
+                  key={c.k}
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs"
+                >
+                  {c.label}
+                  <button
+                    onClick={() => removeChip(c.k)}
+                    className="hover:text-gray-900"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              ))}
               <button
                 onClick={clearFilters}
-                className="text-sm text-gray-600 hover:text-gray-900 flex items-center"
+                className="text-xs text-gray-600 hover:text-gray-900 underline"
               >
-                Clear All
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 ml-1"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                Clear all
               </button>
             </div>
-          </div>
+          )}
+        </header>
 
-          <div className="grid grid-cols-1 gap-4">
-            <input
-              type="text"
-              placeholder="Search patients by name, phone, or email..."
-              className="p-3 border rounded-md w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-              value={filters.search}
-              onChange={(e) =>
-                setFilters({ ...filters, search: e.target.value })
-              }
-            />
-
-            {showFilters && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Status
-                  </label>
-                  <select
-                    className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
-                    value={filters.status}
-                    onChange={(e) =>
-                      setFilters({ ...filters, status: e.target.value })
-                    }
-                  >
-                    <option value="">All Stages</option>
-                    {STATUS_OPTIONS.map((s) => (
-                      <option key={s} value={s}>
-                        {s.replace("_", " ")}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Location
-                  </label>
-                  <select
-                    className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
-                    value={filters.location}
-                    onChange={(e) =>
-                      setFilters({ ...filters, location: e.target.value })
-                    }
-                  >
-                    <option value="">All Locations</option>
-                    {LOCATION_OPTIONS.map((loc) => (
-                      <option key={loc} value={loc}>
-                        {loc}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Counsellor
-                  </label>
-                  <select
-                    className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
-                    value={filters.counsellor}
-                    onChange={(e) =>
-                      setFilters({ ...filters, counsellor: e.target.value })
-                    }
-                  >
-                    <option value="">All Users</option>
-                    {counsellorOptions.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Package
-                  </label>
-                  <select
-                    className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
-                    value={filters.package}
-                    onChange={(e) =>
-                      setFilters({ ...filters, package: e.target.value })
-                    }
-                  >
-                    <option value="">All Packages</option>
-                    {PACKAGE_OPTIONS.map((pkg) => (
-                      <option key={pkg} value={pkg}>
-                        {pkg}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Date From
-                  </label>
-                  <input
-                    type="date"
-                    className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
-                    value={filters.dateFrom}
-                    onChange={(e) =>
-                      setFilters({ ...filters, dateFrom: e.target.value })
-                    }
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Date To
-                  </label>
-                  <input
-                    type="date"
-                    className="p-2 border rounded-md w-full focus:ring-2 focus:ring-blue-500"
-                    value={filters.dateTo}
-                    onChange={(e) =>
-                      setFilters({ ...filters, dateTo: e.target.value })
-                    }
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+        {/* Search bar */}
+        <div className="px-6 pt-4">
+          <input
+            type="text"
+            placeholder="Search by name, phone, or email…"
+            className="w-full md:w-96 px-4 py-2 rounded-lg border shadow-sm focus:ring-2 focus:ring-indigo-200"
+            value={filters.search}
+            onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+          />
         </div>
 
-        {/* Patients Table */}
-        <main className="p-4 md:p-6 flex-1">
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Table */}
+        <section className="p-6">
+          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="min-w-full text-sm text-left">
-                <thead className="bg-gray-100 text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <table className="min-w-full text-sm">
+                <thead className="bg-gray-50 text-gray-700 text-xs uppercase">
                   <tr>
-                    <th className="px-6 py-4">Patient</th>
-                    <th className="px-6 py-4">Contact</th>
-                    <th className="px-6 py-4 hidden lg:table-cell">Location</th>
-                    <th
-                      className="px-6 py-4 cursor-pointer hover:bg-gray-200 transition"
-                      onClick={() => handleSort("personal.visitDate")}
-                    >
-                      <div className="flex items-center">
-                        Visit Date
-                        {sortConfig.key === "personal.visitDate" && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`h-4 w-4 ml-1 ${
-                              sortConfig.direction === "ascending"
-                                ? ""
-                                : "rotate-180"
-                            }`}
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        )}
-                      </div>
-                    </th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4 hidden xl:table-cell">Package</th>
-                    <th className="px-6 py-4 text-right">Actions</th>
+                    <Th label="Patient" />
+                    <Th label="Contact" />
+                    <Th label="Location" />
+                    <Th
+                      label="Visit Date"
+                      sortKey="personal.visitDate"
+                      sort={sort}
+                      onSort={toggleSort}
+                    />
+                    <Th label="Status" />
+                    <Th label="Package" />
+                    <Th label="Others" />
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {currentItems.length > 0 ? (
-                    currentItems.map((patient) => (
-                      <tr
-                        key={patient._id}
-                        className="hover:bg-gray-50 transition group"
+                <tbody className="divide-y divide-gray-100">
+                  {rows.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan={7}
+                        className="py-12 text-center text-gray-500"
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-semibold flex-shrink-0">
-                              {patient.personal.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </div>
-                            <div className="ml-4">
-                              <div className="font-medium text-gray-900 group-hover:text-blue-600 transition">
-                                {patient.personal.name}
-                              </div>
-                              <div className="text-xs text-gray-500 mt-1">
-                                {patient.personal.gender},{" "}
-                                {patient.personal.age}y
-                              </div>
-                            </div>
-                          </div>
+                        No patients found
+                      </td>
+                    </tr>
+                  ) : (
+                    rows.map((p) => (
+                      <tr key={p._id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 font-medium text-gray-900">
+                          {p.personal?.name}
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="text-gray-900">
-                            {patient.personal.phone}
-                          </div>
+                        <td className="px-6 py-4 text-gray-700">
+                          {p.personal?.phone}
                         </td>
-
-                        <td className="px-6 py-4 hidden lg:table-cell">
-                          <div className="text-gray-700">
-                            {patient.personal.location}
-                          </div>
+                        <td className="px-6 py-4 text-gray-700">
+                          {p.personal?.location}
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="text-gray-700">
-                            {formatDate(patient.personal.visitDate)}
-                          </div>
+                        <td className="px-6 py-4 text-gray-700">
+                          {formatDate(p.personal?.visitDate)}
                         </td>
                         <td className="px-6 py-4">
                           <span
-                            className={`px-3 py-1 rounded-full text-xs font-medium ${
-                              STATUS_COLORS[patient.ops.status] ||
-                              "bg-gray-100 text-gray-800"
+                            className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                              STATUS_COLORS[p?.ops?.status] ||
+                              "bg-gray-100 text-gray-700"
                             }`}
                           >
-                            {patient.ops.status.replace("_", " ")}
+                            {p?.ops?.status?.replace("_", " ")}
                           </span>
                         </td>
-                        <td className="px-6 py-4 hidden xl:table-cell">
-                          <div className="text-gray-700">
-                            {patient.personal.package}
-                          </div>
+                        <td className="px-6 py-4 text-gray-700">
+                          {p.personal?.package}
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="flex justify-end gap-3">
+
+                        {/* ✅ Actions column */}
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex justify-end gap-2">
                             <Link
-                              href={`/admin/patients/${patient._id}`}
-                              className="text-indigo-600 hover:text-indigo-900 transition p-1 rounded-full hover:bg-indigo-50"
-                              title="View patient details"
+                              href={`/admin/patients/${p._id}`}
+                              className="p-2 rounded-full hover:bg-indigo-50 text-indigo-600"
+                              title="View details"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                               >
-                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                 <path
-                                  fillRule="evenodd"
-                                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                  clipRule="evenodd"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                />
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M2.458 12C3.732 7.943 7.522 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7s-8.268-2.943-9.542-7z"
                                 />
                               </svg>
                             </Link>
-                            <button
-                              className="text-blue-600 hover:text-blue-900 transition p-1 rounded-full hover:bg-blue-50"
+                            <Link
+                              href={`/admin/patients/${p._id}/edit`}
+                              className="p-2 rounded-full hover:bg-blue-50 text-blue-600"
                               title="Edit patient"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                               >
-                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M15.232 5.232l3.536 3.536M9 13l6.536-6.536a2 2 0 112.828 2.828L11.828 15.828H9v-2.828z"
+                                />
                               </svg>
-                            </button>
+                            </Link>
                           </div>
                         </td>
                       </tr>
                     ))
-                  ) : (
-                    <tr>
-                      <td
-                        colSpan="8"
-                        className="px-6 py-8 text-center text-gray-500"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-12 w-12 mx-auto text-gray-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <p className="mt-4 font-medium">No patients found</p>
-                        <p className="mt-1 text-sm">
-                          Try adjusting your search or filter to find what
-                          you're looking for.
-                        </p>
-                        <button
-                          onClick={clearFilters}
-                          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition"
-                        >
-                          Clear All Filters
-                        </button>
-                      </td>
-                    </tr>
                   )}
                 </tbody>
               </table>
             </div>
-          </div>
 
-          {/* Pagination */}
-          {filteredPatients.length > 0 && (
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-sm text-gray-700">
-                Showing{" "}
-                <span className="font-medium">{indexOfFirstItem + 1}</span> to{" "}
-                <span className="font-medium">
-                  {Math.min(indexOfLastItem, filteredPatients.length)}
-                </span>{" "}
-                of{" "}
-                <span className="font-medium">{filteredPatients.length}</span>{" "}
-                patients
-              </div>
-
-              <div className="flex items-center gap-2">
+            {/* Footer / Pagination */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 px-4 py-3 border-t bg-gray-50">
+              <p className="text-xs text-gray-600">
+                Showing <b>{startIdx + 1}</b>–<b>{endIdx}</b> of <b>{total}</b>
+              </p>
+              <div className="flex items-center gap-3">
                 <select
-                  value={itemsPerPage}
-                  onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                  className="text-sm border rounded-md px-3 py-1 focus:ring-2 focus:ring-blue-500"
+                  className="text-sm border rounded-md px-2 py-1"
+                  value={perPage}
+                  onChange={(e) => setPerPage(Number(e.target.value))}
                 >
-                  <option value="5">5 per page</option>
-                  <option value="10">10 per page</option>
-                  <option value="25">25 per page</option>
-                  <option value="50">50 per page</option>
+                  {[10, 25, 50].map((n) => (
+                    <option key={n} value={n}>
+                      {n} / page
+                    </option>
+                  ))}
                 </select>
-
-                <div className="flex bg-white rounded-md shadow-sm">
+                <div className="flex items-center gap-1">
                   <button
-                    onClick={() => paginate(Math.max(1, currentPage - 1))}
-                    disabled={currentPage === 1}
-                    className="px-3 py-2 rounded-l-md border text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={current <= 1}
+                    className="p-2 rounded-md border bg-white disabled:opacity-40"
                   >
-                    Previous
+                    <ChevronLeft className="w-4 h-4" />
                   </button>
-
-                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                    let pageNum;
-                    if (totalPages <= 5) {
-                      pageNum = i + 1;
-                    } else if (currentPage <= 3) {
-                      pageNum = i + 1;
-                    } else if (currentPage >= totalPages - 2) {
-                      pageNum = totalPages - 4 + i;
-                    } else {
-                      pageNum = currentPage - 2 + i;
-                    }
-
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => paginate(pageNum)}
-                        className={`px-3 py-2 border-t border-b text-sm font-medium ${
-                          currentPage === pageNum
-                            ? "bg-blue-600 text-white"
-                            : "hover:bg-gray-50"
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-
+                  <span className="text-xs text-gray-600 w-16 text-center">
+                    {current} / {pages}
+                  </span>
                   <button
-                    onClick={() =>
-                      paginate(Math.min(totalPages, currentPage + 1))
-                    }
-                    disabled={currentPage === totalPages}
-                    className="px-3 py-2 rounded-r-md border text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={() => setPage((p) => Math.min(pages, p + 1))}
+                    disabled={current >= pages}
+                    className="p-2 rounded-md border bg-white disabled:opacity-40"
                   >
-                    Next
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
             </div>
-          )}
-        </main>
-      </div>
+          </div>
+        </section>
+
+        {/* Drawer */}
+        {drawerOpen && (
+          <div className="fixed inset-0 z-50">
+            <div
+              className="absolute inset-0 bg-black/30"
+              onClick={() => setDrawerOpen(false)}
+            />
+            <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
+              <div className="px-5 py-4 border-b flex items-center justify-between">
+                <h3 className="text-lg font-semibold">Search & Filter</h3>
+                <button
+                  onClick={() => setDrawerOpen(false)}
+                  className="p-1 rounded hover:bg-gray-100"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-5 space-y-5">
+                {/* Quick filters */}
+                <Section title="Quick Filters">
+                  <Field label="Status">
+                    <Select
+                      value={filters.status}
+                      onChange={(v) => setFilters((f) => ({ ...f, status: v }))}
+                      options={[
+                        { label: "All", value: "" },
+                        ...STATUS_OPTIONS.map((s) => ({ label: s, value: s })),
+                      ]}
+                    />
+                  </Field>
+                  <Field label="Branch">
+                    <Select
+                      value={filters.location}
+                      onChange={(v) =>
+                        setFilters((f) => ({ ...f, location: v }))
+                      }
+                      options={[
+                        { label: "All", value: "" },
+                        ...LOCATION_OPTIONS.map((l) => ({
+                          label: l,
+                          value: l,
+                        })),
+                      ]}
+                    />
+                  </Field>
+                  <Field label="Package">
+                    <Select
+                      value={filters.package}
+                      onChange={(v) =>
+                        setFilters((f) => ({ ...f, package: v }))
+                      }
+                      options={[
+                        { label: "All", value: "" },
+                        ...PACKAGE_OPTIONS.map((l) => ({ label: l, value: l })),
+                      ]}
+                    />
+                  </Field>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field label="Date From">
+                      <Input
+                        type="date"
+                        value={filters.dateFrom}
+                        onChange={(v) =>
+                          setFilters((f) => ({ ...f, dateFrom: v }))
+                        }
+                      />
+                    </Field>
+                    <Field label="Date To">
+                      <Input
+                        type="date"
+                        value={filters.dateTo}
+                        onChange={(v) =>
+                          setFilters((f) => ({ ...f, dateTo: v }))
+                        }
+                      />
+                    </Field>
+                  </div>
+                </Section>
+
+                {/* Advanced */}
+                <Section title="Advanced">
+                  <Field label="Counsellor">
+                    <Select
+                      value={filters.counsellor}
+                      onChange={(v) =>
+                        setFilters((f) => ({ ...f, counsellor: v }))
+                      }
+                      options={[
+                        { label: "All", value: "" },
+                        ...counsellorOptions.map((c) => ({
+                          label: c,
+                          value: c,
+                        })),
+                      ]}
+                    />
+                  </Field>
+                  <Field label="Agent (createdBy)">
+                    <Input
+                      placeholder="ID or name"
+                      value={filters.agent}
+                      onChange={(v) => setFilters((f) => ({ ...f, agent: v }))}
+                    />
+                  </Field>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field label="Payment Method">
+                      <Select
+                        value={filters.paymentMethod}
+                        onChange={(v) =>
+                          setFilters((f) => ({ ...f, paymentMethod: v }))
+                        }
+                        options={[
+                          { label: "All", value: "" },
+                          ...PAYMENT_METHODS.map((m) => ({
+                            label: m,
+                            value: m,
+                          })),
+                        ]}
+                      />
+                    </Field>
+                    <Field label="Technique">
+                      <Select
+                        value={filters.technique}
+                        onChange={(v) =>
+                          setFilters((f) => ({ ...f, technique: v }))
+                        }
+                        options={[
+                          { label: "All", value: "" },
+                          ...techniqueOptions.map((t) => ({
+                            label: t,
+                            value: t,
+                          })),
+                        ]}
+                      />
+                    </Field>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field label="Doctor">
+                      <Select
+                        value={filters.doctor}
+                        onChange={(v) =>
+                          setFilters((f) => ({ ...f, doctor: v }))
+                        }
+                        options={[
+                          { label: "All", value: "" },
+                          ...doctorOptions.map((t) => ({ label: t, value: t })),
+                        ]}
+                      />
+                    </Field>
+                    <Field label="Senior Tech">
+                      <Select
+                        value={filters.seniorTech}
+                        onChange={(v) =>
+                          setFilters((f) => ({ ...f, seniorTech: v }))
+                        }
+                        options={[
+                          { label: "All", value: "" },
+                          ...seniorTechOptions.map((t) => ({
+                            label: t,
+                            value: t,
+                          })),
+                        ]}
+                      />
+                    </Field>
+                  </div>
+
+                  <Field label="Implanter">
+                    <Select
+                      value={filters.implanter}
+                      onChange={(v) =>
+                        setFilters((f) => ({ ...f, implanter: v }))
+                      }
+                      options={[
+                        { label: "All", value: "" },
+                        ...implanterOptions.map((t) => ({
+                          label: t,
+                          value: t,
+                        })),
+                      ]}
+                    />
+                  </Field>
+
+                  <Field label="Surgery Date">
+                    <Input
+                      type="date"
+                      value={filters.surgeryDate}
+                      onChange={(v) =>
+                        setFilters((f) => ({ ...f, surgeryDate: v }))
+                      }
+                    />
+                  </Field>
+                </Section>
+              </div>
+
+              <div className="px-5 py-3 border-t bg-gray-50 flex items-center justify-between">
+                <button
+                  onClick={clearFilters}
+                  className="px-4 py-2 rounded-lg border bg-white hover:bg-gray-50"
+                >
+                  Reset
+                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setDrawerOpen(false)}
+                    className="px-4 py-2 rounded-lg border bg-white hover:bg-gray-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => setDrawerOpen(false)}
+                    className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
     </div>
+  );
+}
+
+/* -------------------- Small UI atoms -------------------- */
+function Th({ label, sortKey, sort, onSort }) {
+  const isSortable = !!sortKey;
+  const active = isSortable && sort?.key === sortKey;
+  return (
+    <th
+      className={`px-6 py-3 text-left ${
+        isSortable ? "cursor-pointer select-none" : ""
+      }`}
+      onClick={isSortable ? () => onSort(sortKey) : undefined}
+    >
+      <div className="inline-flex items-center gap-1">
+        {label}
+        {active && (
+          <span className="text-[10px] text-gray-500">
+            {sort.dir === "asc" ? "▲" : "▼"}
+          </span>
+        )}
+      </div>
+    </th>
+  );
+}
+
+function Section({ title, children }) {
+  return (
+    <div className="rounded-lg border bg-white">
+      <div className="px-4 py-2 border-b text-sm font-semibold text-gray-800">
+        {title}
+      </div>
+      <div className="p-4 grid grid-cols-1 gap-4">{children}</div>
+    </div>
+  );
+}
+
+function Field({ label, children }) {
+  return (
+    <label className="block">
+      <span className="block text-xs font-medium text-gray-700 mb-1">
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function Input({ type = "text", value, onChange, placeholder }) {
+  return (
+    <input
+      type={type}
+      value={value}
+      placeholder={placeholder}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full rounded-md border px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+    />
+  );
+}
+
+function Select({ value, onChange, options }) {
+  return (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full rounded-md border px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-200 bg-white"
+    >
+      {options.map((o) => (
+        <option key={`${o.label}-${o.value}`} value={o.value}>
+          {o.label}
+        </option>
+      ))}
+    </select>
   );
 }

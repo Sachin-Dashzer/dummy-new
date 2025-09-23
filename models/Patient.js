@@ -18,8 +18,8 @@ const patientSchema = new mongoose.Schema(
       address: String,
       visitDate: Date,
       reference: {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User"
+        type : String,
+        enum : ["Nandani" , "Anam" , "Nikita yadav" ,  "Anjali" , "Ryan" , "Muskan" , "Rinky" , "Aisha" ,"Sushma" , "Nishi" , "aniska"]
       },
       package: String,
     },
@@ -29,7 +29,7 @@ const patientSchema = new mongoose.Schema(
         type: String,
         enum: ["YES", "NO", "UNKNOWN"],
       },
-      
+
       bloodGroup: {
         type: String,
         enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
@@ -41,8 +41,8 @@ const patientSchema = new mongoose.Schema(
     },
     counselling: {
       counsellor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "User"
+        type: String,
+        enum : ["Ali" , "Sonu sharma" , "Pranendra singh" , "Gulnaaz salmani" , "Mukul Tyagi" , "Srishti" ]
       },
       techniqueSuggested: {
         type: String,
@@ -63,24 +63,24 @@ const patientSchema = new mongoose.Schema(
       graftsImplanted: Number,
       donorCondition: String,
       doctor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "User"
+         type: String,
+        enum : ["Pranendra singh" , "Pranav" , "Srishti" ]
       },
       seniorTech: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "User"
+        type: String,
+        enum : ["Aarav Sharma", "Vihaan Patel", "Advait Joshi", "Rajesh Kumar"]
       },
       implanterRight: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "User"
+        type: String,
+        enum : ["Karthik Iyer", "Rohan Mehta", "Anika Desai", "Priya Singh"]
       },
       implanterLeft: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "User"
+        type: String,
+        enum : [ "Neha Reddy", "Deepika Nair", "Sneha Gupta"]
       },
       graftingPerson: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "User"
+        type: String,
+        enum : ["Zara Ahmed", "Arjun Kapoor", "Sameer Ali", "Kavya Srinivasan", "Ritu Choudhary"]
       },
       helper: String,
     },
@@ -93,6 +93,9 @@ const patientSchema = new mongoose.Schema(
         {
           date: Date,
           method: String,
+          service: {
+            type: String,
+          },
           amount: Number,
         },
       ],
