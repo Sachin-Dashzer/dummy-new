@@ -8,12 +8,8 @@ export async function POST(req) {
   const data = await req.json();
   const { branch = "All", from, to } = data;
 
-  console.log(data);
-
-  // ✅ Common filter for branch
   const branchFilter = branch === "All" ? {} : { "personal.location": branch };
 
-  // ✅ Default dates → today if not provided
   const today = new Date();
   const defaultFrom = new Date(today);
   defaultFrom.setHours(0, 0, 0, 0); // start of today

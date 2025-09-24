@@ -42,16 +42,14 @@ export default function AdminDashboard() {
     return d;
   };
 
- const getWeekRange = () => {
-  const today = new Date();
-  today.setHours(23, 59, 59, 999); // end of today
-
-  const last7 = new Date();
-  last7.setDate(today.getDate() - 6); // go back 6 days
-  last7.setHours(0, 0, 0, 0); // start of that day
-
-  return { from: last7, to: today };
-};
+  const getWeekRange = () => {
+    const today = new Date();
+    today.setHours(23, 59, 59, 999);
+    const last7 = new Date();
+    last7.setDate(today.getDate() - 6);
+    last7.setHours(0, 0, 0, 0);
+    return { from: last7, to: today };
+  };
 
   // --- Build payload for API ---
   const buildPayload = () => {
@@ -103,26 +101,48 @@ export default function AdminDashboard() {
     fetchData();
   }, [branch, dateRange, customDates]);
 
-  // --- Metric click navigation ---
+  // ✅ helper: add N days in UTC and keep the original time-of-day
+  const plusDaysUTC = (dateInput, days = 1) => {
+    const d = new Date(dateInput);
+    if (Number.isNaN(d.getTime())) return dateInput; // fallback if bad input
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toISOString();
+  };
+
   const handleMetricClick = (metricTitle) => {
     if (!dashboardData) return;
 
-    const from = dashboardData.dateRange.from + 1;
-    const to = dashboardData.dateRange.to;
+    const from = dashboardData?.dateRange?.from;
+    const to = dashboardData?.dateRange?.to;
+    const branchParam = dashboardData?.branch ?? "All";
 
-    let filterParams = `dateFrom=${from}&dateTo=${to}&branch=${dashboardData.branch}`;
+    // 🔁 send dateFrom = one day after "from"
+    const filterParams = new URLSearchParams({
+      dateFrom: plusDaysUTC(from, 1),
+      dateTo: to,
+      branch: branchParam,
+    });
 
     switch (metricTitle) {
-      case "Surgery Ready":
-        filterParams += "&status=READY";
+      case "Appointments":
         break;
-      case "Today's Surgeries":
-        filterParams += "&status=POST_OP";
+      case "Patients Visited":
+        filterParams.set("visited", "true");
+        break;
+      case "Surgery Ready":
+        filterParams.set("readyForSurgery", "true");
+        break;
+      case "Total's Surgeries":
+        filterParams.set("surgery", "true");
+        break;
+      case "Amount Received":
+        filterParams.set("amountReceived", "true");
         break;
       default:
         break;
     }
-    router.push(`/admin/patients?${filterParams}`);
+
+    router.push(`/admin/patients?${filterParams.toString()}`);
   };
 
   // --- Metrics ---
@@ -149,7 +169,7 @@ export default function AdminDashboard() {
       trend: "+5% from yesterday",
     },
     {
-      title: "Today's Surgeries",
+      title: "Total's Surgeries",
       value: dashboardData?.surgeries?.[0] || 0,
       icon: Stethoscope,
       color: "from-rose-500 to-rose-600",

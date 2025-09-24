@@ -48,7 +48,7 @@ const formatDate = (date) =>
 const getInitialFiltersFromURL = (sp) => ({
   search: "",
   status: sp.get("status") || "",
-  location: sp.get("branch") || "", // map branch -> location
+  location: sp.get("branch") === "All" ? "" : sp.get("branch") || "",
   counsellor: sp.get("counsellor") || "",
   package: sp.get("package") || "",
   dateFrom: sp.get("dateFrom") || "",
@@ -59,7 +59,9 @@ const getInitialFiltersFromURL = (sp) => ({
   implanter: "",
   technique: "",
   paymentMethod: "",
-  surgeryDate: "",
+  surgeryDate: sp.get("surgeryDate") || "",
+  visited: sp.get("visited") === "true",
+  readyForSurgery: sp.get("readyForSurgery") === "true",
 });
 
 /* ===================================================
@@ -162,6 +164,14 @@ export default function PatientDashboard() {
       list = list.filter(
         (p) => p?.counselling?.counsellor === filters.counsellor
       );
+    if (filters.visited) {
+      list = list.filter((p) => Boolean(p?.counselling?.counsellor));
+    }
+
+    if (filters.readyForSurgery) {
+      list = list.filter((p) => p?.counselling?.readyForSurgery === true);
+    }
+
     if (filters.package)
       list = list.filter((p) => p?.personal?.package === filters.package);
     if (filters.agent)
@@ -287,6 +297,11 @@ export default function PatientDashboard() {
         k: "surgeryDate",
         label: `Surgery: ${formatDate(filters.surgeryDate)}`,
       });
+    if (filters.visited)
+      chips.push({ k: "visited", label: "Visited Patients" });
+    if (filters.readyForSurgery)
+      chips.push({ k: "readyForSurgery", label: "Ready for Surgery" });
+
     if (filters.dateFrom)
       chips.push({ k: "dateFrom", label: `From: ${filters.dateFrom}` });
     if (filters.dateTo)
