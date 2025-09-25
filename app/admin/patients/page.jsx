@@ -459,10 +459,17 @@ export default function PatientDashboard() {
                         </td>
 
                         {/* ✅ Actions column */}
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex justify-end gap-2">
-                            <Link
-                              href={`/admin/patients/${p._id}`}
+                        <td className="px-6 py-4 text-center">
+                          <div className="flex justify-center">
+                            {/* View details (new tab) */}
+                            <button
+                              onClick={() =>
+                                window.open(
+                                  `/admin/patients/${p._id}`,
+                                  "_blank",
+                                  "noopener,noreferrer"
+                                )
+                              }
                               className="p-2 rounded-full hover:bg-indigo-50 text-indigo-600"
                               title="View details"
                             >
@@ -486,15 +493,17 @@ export default function PatientDashboard() {
                                   d="M2.458 12C3.732 7.943 7.522 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7s-8.268-2.943-9.542-7z"
                                 />
                               </svg>
-                            </Link>
+                            </button>
+
+                            {/* Edit patient (new tab) */}
                             <Link
-                              href={`/admin/patients/${p._id}/edit`}
+                              href={`/admin/patients/edit/${p._id}`}
                               className="p-2 rounded-full hover:bg-blue-50 text-blue-600"
                               title="Edit patient"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-4 w-4"
+                                className="h-5 w-5"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"

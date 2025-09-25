@@ -29,13 +29,13 @@ export default function Sidebar() {
   const [activePage, setActivePage] = useState("");
 
   const navItems = [
-    { name: "Dashboard", path: "dashboard" },
-    { name: "Patients", path: "patients" },
-    { name: "Counsellors", path: "counsellors" },
-    { name: "Amounts", path: "amounts" },
-    { name: "Implanter", path: "implanter" },
-    { name: "Agents", path: "agents" },
-    { name: "Technique", path: "technique" },
+    { name: "Dashboard", path: "/admin/dashboard" },
+    { name: "Patients", path: "/admin/patients" },
+    { name: "Counsellors", path: "/admin/counsellors" },
+    { name: "Amounts", path: "/admin/amounts" },
+    { name: "Implanter", path: "/admin/implanter" },
+    { name: "Agents", path: "/admin/agents" },
+    { name: "Technique", path: "/admin/technique" },
   ];
 
   return (
