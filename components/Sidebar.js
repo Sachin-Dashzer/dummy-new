@@ -31,11 +31,11 @@ export default function Sidebar() {
   const navItems = [
     { name: "Dashboard", path: "/admin/dashboard" },
     { name: "Patients", path: "/admin/patients" },
-    { name: "Counsellors", path: "/admin/counsellors" },
+    { name: "Employees", path: "/admin/employees" },
     { name: "Amounts", path: "/admin/amounts" },
-    { name: "Implanter", path: "/admin/implanter" },
-    { name: "Agents", path: "/admin/agents" },
-    { name: "Technique", path: "/admin/technique" },
+    // { name: "Implanter", path: "/admin/implanter" },
+    // { name: "Agents", path: "/admin/agents" },
+    // { name: "Technique", path: "/admin/technique" },
   ];
 
   return (

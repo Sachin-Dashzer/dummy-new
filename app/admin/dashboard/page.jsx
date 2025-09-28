@@ -96,15 +96,13 @@ export default function AdminDashboard() {
     }
   };
 
-  // --- Call API on mount + whenever filters change ---
   useEffect(() => {
     fetchData();
   }, [branch, dateRange, customDates]);
 
-  // ✅ helper: add N days in UTC and keep the original time-of-day
   const plusDaysUTC = (dateInput, days = 1) => {
     const d = new Date(dateInput);
-    if (Number.isNaN(d.getTime())) return dateInput; // fallback if bad input
+    if (Number.isNaN(d.getTime())) return dateInput;
     d.setUTCDate(d.getUTCDate() + days);
     return d.toISOString();
   };
@@ -116,7 +114,6 @@ export default function AdminDashboard() {
     const to = dashboardData?.dateRange?.to;
     const branchParam = dashboardData?.branch ?? "All";
 
-    // 🔁 send dateFrom = one day after "from"
     const filterParams = new URLSearchParams({
       dateFrom: plusDaysUTC(from, 1),
       dateTo: to,
@@ -125,6 +122,7 @@ export default function AdminDashboard() {
 
     switch (metricTitle) {
       case "Appointments":
+        filterParams.set("appointments", "true");
         break;
       case "Patients Visited":
         filterParams.set("visited", "true");
@@ -132,7 +130,7 @@ export default function AdminDashboard() {
       case "Surgery Ready":
         filterParams.set("readyForSurgery", "true");
         break;
-      case "Total's Surgeries":
+      case "Total Surgeries":
         filterParams.set("surgery", "true");
         break;
       case "Amount Received":
@@ -149,28 +147,28 @@ export default function AdminDashboard() {
   const metricCards = [
     {
       title: "Appointments",
-      value: dashboardData?.appointments?.[0] || 0,
+      value: dashboardData?.appointments || 0,
       icon: Calendar,
       color: "from-indigo-500 to-indigo-600",
       trend: "+12% from yesterday",
     },
     {
       title: "Patients Visited",
-      value: dashboardData?.visited?.[0] || 0,
+      value: dashboardData?.visited || 0,
       icon: Activity,
       color: "from-green-500 to-green-600",
       trend: "+8% from yesterday",
     },
     {
       title: "Surgery Ready",
-      value: dashboardData?.surgeryConfirmations?.[0] || 0,
+      value: dashboardData?.surgeryConfirmations || 0,
       icon: CheckCircle,
       color: "from-amber-500 to-amber-600",
       trend: "+5% from yesterday",
     },
     {
-      title: "Total's Surgeries",
-      value: dashboardData?.surgeries?.[0] || 0,
+      title: "Total Surgeries",
+      value: dashboardData?.surgeries || 0,
       icon: Stethoscope,
       color: "from-rose-500 to-rose-600",
       trend: "+15% from yesterday",
@@ -210,6 +208,7 @@ export default function AdminDashboard() {
           </div>
         ) : (
           <>
+            {/* Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
               {metricCards.map((card, index) => (
                 <MetricCard
@@ -224,8 +223,10 @@ export default function AdminDashboard() {
               ))}
             </div>
 
-            <ChartsSection data={dashboardData?.appointments?.[1] || []} />
-            <RecentActivity activities={dashboardData?.visited?.[1] || []} />
+
+            <ChartsSection data={dashboardData} />
+
+            <RecentActivity activities={dashboardData?.recentActivities || []} />
           </>
         )}
       </main>
