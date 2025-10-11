@@ -33,8 +33,8 @@ export default function Sidebar() {
     { name: "Patients", path: "/admin/patients" },
     { name: "Employees", path: "/admin/employees" },
     { name: "Amounts", path: "/admin/amounts" },
-    // { name: "Implanter", path: "/admin/implanter" },
-    // { name: "Agents", path: "/admin/agents" },
+    { name: "Agents", path: "/admin/agents" },
+    { name: "Reports", path: "/admin/reports" },
     // { name: "Technique", path: "/admin/technique" },
   ];
 
